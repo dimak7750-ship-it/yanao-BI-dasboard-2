@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>РСУД BI · KMNS_02. Статистика</title>
+<title>РСУД BI · KMNS_02. Статистика КМНС ЯНАО</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.5.0/echarts.min.js"></script>
 <style>
 :root{--cyan:#3FB6D3;--indigo:#3E3E6E;--green:#5BB85B;--orange:#E8883C;--red:#d9534f;--grey:#7C7C8A;--blue:#12325b;
@@ -23,13 +23,13 @@ html,body{background:var(--bg);font-family:'Inter','Segoe UI','Roboto',system-ui
 .dash-meta{font-size:12px;color:var(--muted);margin:5px 0 12px;}
 .dash-meta b{color:#48566c;font-weight:600;}
 .tabs{display:flex;gap:2px;overflow-x:auto;}
-.tab{padding:11px 16px;font-size:13.5px;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:.15s;}
+.tab{padding:11px 15px;font-size:13.5px;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:.15s;}
 .tab:hover{color:var(--indigo);}
 .tab.active{color:var(--cyan);border-bottom-color:var(--cyan);font-weight:600;}
 .globalbar{position:sticky;top:48px;z-index:55;background:#fff;border-bottom:1px solid var(--border);display:flex;flex-wrap:wrap;gap:14px;align-items:flex-end;padding:12px 22px;}
 .filt{display:flex;flex-direction:column;gap:4px;}
 .filt label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;font-weight:600;}
-.filt select{appearance:none;background:#fff url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b7684' stroke-width='2'><path d='M6 9l6 6 6-6'/></svg>") no-repeat right 11px center;border:1px solid var(--border);border-radius:8px;padding:10px 32px 10px 12px;font-size:13.5px;color:#232b36;min-width:230px;min-height:42px;cursor:pointer;font-family:inherit;}
+.filt select{appearance:none;background:#fff url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b7684' stroke-width='2'><path d='M6 9l6 6 6-6'/></svg>") no-repeat right 11px center;border:1px solid var(--border);border-radius:8px;padding:10px 32px 10px 12px;font-size:13.5px;color:#232b36;min-width:200px;min-height:42px;cursor:pointer;font-family:inherit;}
 .filt select:focus{outline:none;border-color:var(--cyan);box-shadow:0 0 0 3px rgba(63,182,211,.15);}
 .bc{margin-left:auto;align-self:center;font-size:12px;color:var(--muted);}
 .bc b{color:var(--blue);}
@@ -37,13 +37,13 @@ html,body{background:var(--bg);font-family:'Inter','Segoe UI','Roboto',system-ui
 .lead-band .sec-no{font-size:11px;letter-spacing:1px;color:var(--cyan);font-weight:700;text-transform:uppercase;}
 .lead-band .sec-title{font-size:15px;font-weight:700;color:var(--blue);margin:2px 0 3px;}
 .lead-band .sec-say{font-size:13px;color:#48566c;line-height:1.45;}
-.kpirow{display:grid;gap:14px;padding:14px 22px 0;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));}
+.kpirow{display:grid;gap:14px;padding:14px 22px 0;grid-template-columns:repeat(auto-fit,minmax(178px,1fr));}
 .kpi{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:15px 16px;display:flex;flex-direction:column;justify-content:center;min-height:96px;}
 .kpi .l{font-size:11.5px;color:var(--muted);margin-bottom:7px;line-height:1.3;}
-.kpi .v{font-size:28px;font-weight:800;line-height:1;letter-spacing:-.5px;color:var(--indigo);}
+.kpi .v{font-size:27px;font-weight:800;line-height:1;letter-spacing:-.5px;color:var(--indigo);}
 .kpi .s{font-size:11px;color:var(--grey);margin-top:6px;line-height:1.3;}
 .kpi.accent .v{color:var(--blue);}.kpi.cyan .v{color:var(--cyan);}.kpi.green .v{color:var(--green);}
-.kpi.orange .v{color:var(--orange);}.kpi.red .v{color:var(--red);}
+.kpi.orange .v{color:var(--orange);}.kpi.red .v{color:var(--red);}.kpi.money .v{color:var(--blue);}
 .wrap{padding:14px 22px 40px;}
 .grid{display:grid;gap:16px;grid-template-columns:repeat(12,1fr);}
 .col-3{grid-column:span 3;}.col-4{grid-column:span 4;}.col-5{grid-column:span 5;}.col-6{grid-column:span 6;}
@@ -52,12 +52,48 @@ html,body{background:var(--bg);font-family:'Inter','Segoe UI','Roboto',system-ui
 @media(max-width:639px){.col-3,.col-4,.col-5,.col-6,.col-7,.col-8{grid-column:span 12;}}
 .card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:14px 16px 8px;display:flex;flex-direction:column;min-width:0;}
 .card-title{font-size:13px;color:var(--title);font-weight:600;margin-bottom:6px;}
-.chart{width:100%;height:clamp(260px,34vh,330px);}
-.chart.tall{height:clamp(320px,42vh,400px);}
+.chart{width:100%;height:clamp(250px,32vh,315px);}
+.chart.tall{height:clamp(300px,38vh,375px);}
+.subhead{grid-column:span 12;font-size:12px;letter-spacing:.6px;text-transform:uppercase;color:var(--blue);font-weight:700;padding:8px 2px 0;border-top:1px solid var(--border);margin-top:4px;}
+.tbl-scroll{overflow-x:auto;}
+table.dt{border-collapse:collapse;width:100%;font-size:12px;}
+table.dt th,table.dt td{border:1px solid var(--border);padding:7px 9px;text-align:right;white-space:nowrap;}
+table.dt th{background:#eef3f8;color:var(--indigo);font-weight:600;}
+table.dt td:first-child,table.dt th:first-child{text-align:left;position:sticky;left:0;background:#f7f9fc;min-width:240px;}
+table.dt tr.total td{background:#eef2f8;font-weight:700;}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%;}
+.small-facts{grid-column:span 12;display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));}
+.fact{background:#f7fafc;border:1px solid var(--border);border-radius:8px;padding:12px 14px;font-size:12.5px;color:#3d4a5e;line-height:1.4;}
+.fact b{color:var(--blue);font-size:16px;display:block;}
 .footer{padding:18px 22px 30px;font-size:12px;color:var(--muted);border-top:1px solid var(--border);margin-top:18px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;}
 .footer .src{margin-left:auto;}
 .badge{display:inline-block;background:#eef4fa;color:var(--blue);border-radius:5px;padding:2px 8px;font-size:11px;font-weight:600;}
 .hidden{display:none;}
+
+.tbl{width:100%;border-collapse:collapse;font-size:12.5px;}
+.tbl th{text-align:left;font-weight:600;color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.3px;padding:9px 10px;border-bottom:1px solid var(--border);white-space:nowrap;}
+.tbl td{padding:10px;border-bottom:1px solid #f1f4f8;vertical-align:middle;}
+.tbl tr:last-child td{border-bottom:none;}
+.tbl .num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap;}
+.tbl .ctr{text-align:center;}
+.st{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600;white-space:nowrap;}
+.st.ok{background:#e8f6ec;color:#3d8f4f;}
+.st.warn{background:#fdf3e3;color:#b57420;}
+.st.bad{background:#fdeceb;color:#c2413d;}
+.cellv{display:inline-block;padding:4px 10px;border-radius:6px;font-weight:700;font-variant-numeric:tabular-nums;}
+.cellv.ok{background:#eaf7ee;color:#3d8f4f;}
+.cellv.warn{background:#fdf5e6;color:#b57420;}
+.cellv.bad{background:#fdeeed;color:#c2413d;}
+.tnote{font-size:11.5px;color:var(--muted);padding:10px 2px 4px;line-height:1.45;}
+.bar-in{height:7px;border-radius:4px;background:#eef2f7;overflow:hidden;min-width:60px;}
+.bar-in i{display:block;height:100%;border-radius:4px;}
+.tscroll{overflow-x:auto;}
+.pend{color:var(--muted);font-size:22px;font-weight:700;}
+.kpi.ico{flex-direction:row;align-items:center;gap:13px;}
+.kpi.ico .ic{width:42px;height:42px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:19px;font-weight:800;color:#fff;flex:none;}
+.kpi.ico .tx .l{margin-bottom:3px;}
+.kpi.ico .tx .v{font-size:26px;}
+.chart.xtall{height:clamp(380px,50vh,480px);}
 </style>
 </head>
 <body>
@@ -70,94 +106,292 @@ html,body{background:var(--bg);font-family:'Inter','Segoe UI','Roboto',system-ui
 
 <div class="dash-title-row">
   <div class="dash-title"><h1>KMNS_02. Статистика</h1><span class="verified">✓</span></div>
-  <div class="dash-meta">Цифровой портрет представителя ТОЖ КМНС в ЯНАО · источник: <b>ГИС «АРГИШ»</b> · данные на 2025 год</div>
+  <div class="dash-meta">Цифровой портрет представителя ТОЖ КМНС в ЯНАО · автор: <b>Департамент по делам КМНС ЯНАО</b> · источник: <b>ГИС «АРГИШ»</b> · данные на 2025 год</div>
   <div class="tabs">
     <div class="tab active" data-tab="demo">Демография и география</div>
-    <div class="tab" data-tab="econ">Экономико-производственный капитал</div>
-    <div class="tab" data-tab="support">Обеспеченность соцподдержкой</div>
+    <div class="tab" data-tab="support">Меры поддержки</div>
+    <div class="tab" data-tab="analytics">Аналитика</div>
     <div class="tab" data-tab="edu">Образование</div>
+    <div class="tab" data-tab="roadmap">Дорожная карта</div>
+  </div>
   </div>
 </div>
 
 <div class="globalbar">
   <div class="filt"><label>Муниципальное образование</label><select id="g-mo"></select></div>
-  <div class="bc">Разрез: <b id="bc-mo">Сводно по округу</b></div>
+  <div class="filt"><label>Год</label><select id="g-year"></select></div>
+  <div class="filt" id="proj-wrap" style="display:none;"><label>Проект поддержки</label><select id="g-proj">
+    <option value="chum">«Чумовой капитал», млн ₽</option>
+    <option value="gsm">Выплаты на ГСМ, млн ₽</option>
+    <option value="std">Региональный стандарт (ТМЦ), тыс ₽</option>
+    <option value="koch">Кочевые выплаты, семей</option>
+    <option value="stip">Именная стипендия, получатели</option>
+    <option value="najm">Возмещение найма жилья (ЕПГУ)</option>
+  </select></div>
+  <div class="filt" id="pos-wrap" style="display:none;"><label>Детализация по позициям</label><select id="g-pos"></select></div>
+  <div class="filt" id="st-wrap" style="display:none;"><label>Фильтр по статусу</label><select id="g-st"><option value="all">Все</option><option value="ok">В графике</option><option value="warn">Отклонение до 10%</option><option value="bad">Отставание</option></select></div>
+  <div class="bc">Разрез: <b id="bc-mo">Сводно по округу</b> · <b id="bc-year">2026</b></div>
 </div>
 
 <!-- 1 DEMO -->
 <section id="tab-demo" class="tabpane">
   <div class="lead-band"><div class="sec-no">01 · Демографически-географический статус</div>
-    <div class="sec-title" id="d-title">Традиционный образ жизни ведут 17 711 человек</div>
-    <div class="sec-say">Распределение населения ТОЖ по этносам, типу образа жизни и муниципальным образованиям.</div></div>
+    <div class="sec-title" id="d-title">Традиционный образ жизни ведут 17 711 человек — почти три четверти кочуют</div>
+    <div class="sec-say">Реестр ГИС «АРГИШ» охватывает 8 муниципальных образований; наибольшая концентрация — в Ямальском и Тазовском районах.</div></div>
   <div class="kpirow">
-    <div class="kpi accent"><div class="l">Общая численность ТОЖ</div><div class="v" id="d-pop">17 711</div><div class="s" id="d-pop-s">человек в реестре</div></div>
-    <div class="kpi green"><div class="l">Среднее число членов семьи ТОЖ</div><div class="v" id="d-avg">3,5</div><div class="s" id="d-avg-s">чел. в семье · 5 103 семьи</div></div>
+    <div class="kpi accent"><div class="l">Общая численность ТОЖ</div><div class="v" id="d-pop">17 711</div><div class="s" id="d-pop-s">100% реестра · человек</div></div>
+    <div class="kpi cyan"><div class="l">Кочевой / полукочевой</div><div class="v" id="d-life">12 892</div><div class="s" id="d-life-s">кочевой · 72,8%</div></div>
+    <div class="kpi"><div class="l">Семей, ведущих ТОЖ</div><div class="v" id="d-fam">5 103</div><div class="s" id="d-fam-s">2 000 многодетных · 600 малоимущих</div></div>
+    <div class="kpi green"><div class="l">Среднее число членов семьи</div><div class="v" id="d-avg">3,5</div><div class="s">человек в чуме</div></div>
+    <div class="kpi"><div class="l">Преобладающий этнос</div><div class="v" id="d-etno">Ненцы</div><div class="s" id="d-etno-s">≈ 87% населения ТОЖ</div></div>
   </div>
   <div class="wrap"><div class="grid">
-    <div class="card col-4"><div class="card-title">Распределение по этносам</div><div id="c-d-etno" class="chart tall"></div></div>
-    <div class="card col-4"><div class="card-title">Тип образа жизни</div><div id="c-d-life" class="chart tall"></div></div>
-    <div class="card col-4"><div class="card-title">Распределение по муниципальным образованиям, чел.</div><div id="c-d-mo" class="chart tall"></div></div>
+    <div class="card col-4"><div class="card-title">Тип образа жизни</div><div id="c-d-life" class="chart"></div></div>
+    <div class="card col-4"><div class="card-title">Этносоциальная принадлежность</div><div id="c-d-etno" class="chart"></div></div>
+    <div class="card col-4"><div class="card-title">Половозрастная структура, чел.</div><div id="c-d-age" class="chart"></div></div>
+    <div class="card col-8"><div class="card-title">Население ТОЖ по муниципальным образованиям, чел.</div><div id="c-d-mo" class="chart tall"></div></div>
+    <div class="card col-4"><div class="card-title">Динамика численности ТОЖ по годам, чел.</div><div id="c-d-years" class="chart tall"></div></div>
+    <div class="card col-12"><div class="card-title">География: фактории и обслуженное население по районам</div><div id="c-d-fact" class="chart"></div></div>
   </div></div>
 </section>
 
 <!-- 2 ECON -->
-<section id="tab-econ" class="tabpane hidden">
-  <div class="lead-band"><div class="sec-no">02 · Экономико-производственный капитал</div>
-    <div class="sec-title" id="e-title">Поголовье оленей — 636 тыс.; занятость — оленеводство и рыболовство</div>
-    <div class="sec-say">Поголовье и заготовка мяса по районам, структура занятости населения ТОЖ.</div></div>
-  <div class="kpirow">
-    <div class="kpi accent"><div class="l">Поголовье оленей</div><div class="v" id="e-deer">636 000</div><div class="s" id="e-deer-s">голов · в среднем 79 500 на район</div></div>
-    <div class="kpi cyan"><div class="l">Сдано мяса на убой</div><div class="v" id="e-meat">2 948 т</div><div class="s">за год</div></div>
-    <div class="kpi green"><div class="l">Занято в оленеводстве</div><div class="v" id="e-olen">3 342</div><div class="s">семей / хозяйств</div></div>
-  </div>
-  <div class="wrap"><div class="grid">
-    <div class="card col-4"><div class="card-title">Поголовье оленей по районам, голов</div><div id="c-e-deer" class="chart tall"></div></div>
-    <div class="card col-4"><div class="card-title">Сдача мяса на убой по районам, тонн</div><div id="c-e-meat" class="chart tall"></div></div>
-    <div class="card col-4"><div class="card-title">Категории занятости</div><div id="c-e-occ" class="chart tall"></div></div>
-  </div></div>
-</section>
+
 
 <!-- 3 SUPPORT -->
 <section id="tab-support" class="tabpane hidden">
   <div class="lead-band"><div class="sec-no">03 · Обеспеченность мерами социальной поддержки</div>
-    <div class="sec-title" id="s-title">Обеспеченность мерами поддержки: факт от потребности по районам</div>
-    <div class="sec-say">Процент выданного от потребности по региональному стандарту, чумовому капиталу и кочевым выплатам; малоимущие, жильё, заявления.</div></div>
+    <div class="sec-title" id="s-title">На «чумовой капитал» и ГСМ направлено ≈ 367 млн ₽; лидер — Ямальский район</div>
+    <div class="sec-say">Расходы по проектам в разрезе МО и до отдельных позиций (ТМЦ регионального стандарта, комплект чумового капитала). Меняйте фильтры — обновляется весь раздел.</div></div>
   <div class="kpirow">
-    <div class="kpi cyan"><div class="l">Обеспеченность жильём</div><div class="v" id="s-house">38,4%</div><div class="s" id="s-house-s">имеют жильё · нуждаются 61,6%</div></div>
-    <div class="kpi orange"><div class="l">Малоимущих граждан ТОЖ</div><div class="v" id="s-mal">4 919</div><div class="s">на 2025 год</div></div>
-    <div class="kpi green"><div class="l">Семей на кочевых выплатах</div><div class="v" id="s-koch">3 398</div><div class="s">получателей</div></div>
-    <div class="kpi accent"><div class="l">Средняя обеспеченность рег. стандартом</div><div class="v" id="s-std">84%</div><div class="s">факт от потребности</div></div>
+    <div class="kpi money"><div class="l" id="s-k1-l">«Чумовой капитал» приобретено</div><div class="v" id="s-k1">≈ 240 млн ₽</div><div class="s" id="s-k1-s">по всем МО</div></div>
+    <div class="kpi money"><div class="l">Выплачено на ГСМ, 2022–2025</div><div class="v" id="s-k2">127,2 млн ₽</div><div class="s">≈ 36 млн ₽ в год</div></div>
+    <div class="kpi money"><div class="l" id="s-k3-l">Региональный стандарт (ТМЦ)</div><div class="v" id="s-k3">96,7 млн ₽</div><div class="s">возмещение по МО</div></div>
+    <div class="kpi"><div class="l">Семей на кочевых выплатах</div><div class="v" id="s-k4">3 398</div><div class="s">проактивный режим — 60%</div></div>
   </div>
   <div class="wrap"><div class="grid">
-    <div class="card col-6"><div class="card-title">Обеспеченность мерами поддержки по районам, % (факт от потребности)</div><div id="c-s-radar" class="chart tall"></div></div>
-    <div class="card col-6"><div class="card-title">Заявления по мерам поддержки — кто подаёт, ед.</div><div id="c-s-appl" class="chart tall"></div></div>
-    <div class="card col-6"><div class="card-title">Малоимущие семьи по районам</div><div id="c-s-mal" class="chart"></div></div>
-    <div class="card col-6"><div class="card-title">Кочевые выплаты по районам, семей</div><div id="c-s-kochmo" class="chart"></div></div>
+    <div class="card col-7"><div class="card-title" id="s-main-title">«Чумовой капитал» — по МО, млн ₽</div><div id="c-s-main" class="chart tall"></div></div>
+    <div class="card col-5"><div class="card-title" id="s-pos-title">Детализация по позициям</div><div id="c-s-pos" class="chart tall"></div></div>
+    <div class="card col-4"><div class="card-title">Кочевые выплаты по МО, семей</div><div id="c-s-koch" class="chart"></div></div>
+    <div class="card col-4"><div class="card-title">Малоимущие (число лиц) по годам</div><div id="c-s-mal" class="chart"></div></div>
+    <div class="card col-4"><div class="card-title">Расходы на ГСМ по годам, млн ₽</div><div id="c-s-gsm" class="chart"></div></div>
+    <div class="small-facts">
+      <div class="fact"><b>4 500 ₽/год</b>допсоцстипендия · до 50 студентов</div>
+      <div class="fact"><b>2 000 ₽/мес</b>возмещение найма жилья студентам</div>
+      <div class="fact"><b>80 тыс. ₽</b>«подъёмные» · 21 студент (19 из ТОЖ)</div>
+      <div class="fact"><b>≈ 367 млн ₽</b>суммарно на чумовой капитал и ГСМ</div>
+    </div>
+    <div class="card col-12"><div class="card-title">Заявления по мерам поддержки — всего по видам, ед.</div><div id="c-s-appl" class="chart"></div></div>
   </div></div>
 </section>
 
-<!-- 4 EDUCATION -->
-<section id="tab-edu" class="tabpane hidden">
-  <div class="lead-band"><div class="sec-no">04 · Образование</div>
-    <div class="sec-title" id="ed-title">Выпускники 9 классов: 49% продолжают в 10 классе, 42% — в СПО</div>
-    <div class="sec-say">Поступление и выпуск в СПО, выпускники 9 классов и их траектории после школы.</div></div>
+<!-- 4 HOUSING -->
+
+
+<!-- 5 EDUCATION -->
+
+
+<!-- 6 ANALYTICS -->
+
+
+<section id="tab-analytics" class="tabpane hidden">
+
+  <div class="lead-band"><div class="sec-no">01 · Чумовой капитал и меры поддержки</div>
+    <div class="sec-title">Проактивная аналитика: потенциал и прогноз получателей ЧК</div>
+    <div class="sec-say">Воронка перехода «потенциальные → имеющие право → в очереди» и прогноз новых получателей до 2030 года.</div></div>
   <div class="kpirow">
-    <div class="kpi accent"><div class="l">Выпускников 9 классов</div><div class="v" id="ed-v9">1 891</div><div class="s">всего по округу</div></div>
-    <div class="kpi cyan"><div class="l">Продолжили в 10 классе</div><div class="v" id="ed-v910">932</div><div class="s" id="ed-v910-s">49% выпускников 9 кл.</div></div>
-    <div class="kpi green"><div class="l">Поступили в СПО (9 кл.)</div><div class="v" id="ed-v9spo">797</div><div class="s" id="ed-v9spo-s">42% выпускников 9 кл.</div></div>
-    <div class="kpi orange"><div class="l">Выпускников 11 классов</div><div class="v" id="ed-v11">600</div><div class="s">381 в ВУЗ · 148 СПО</div></div>
+    <div class="kpi cyan"><div class="l">Потенциальные (прогноз)</div><div class="v" id="a-pot">1 319</div><div class="s">семей с 1–2 детьми</div></div>
+    <div class="kpi orange"><div class="l">Имеют право, не обратились</div><div class="v" id="a-right">657</div><div class="s">семей</div></div>
+    <div class="kpi accent"><div class="l">В очереди на получение</div><div class="v" id="a-queue">184</div><div class="s">заявлений</div></div>
+    <div class="kpi green"><div class="l">Уже получили ЧК</div><div class="v" id="a-got">391</div><div class="s">429 компл. чума и нарт</div></div>
   </div>
   <div class="wrap"><div class="grid">
-    <div class="card col-6"><div class="card-title">Поступившие и выпустившиеся из СПО по годам, чел.</div><div id="c-ed-spo" class="chart tall"></div></div>
-    <div class="card col-6"><div class="card-title">Выпускники 9 классов: куда пошли, чел.</div><div id="c-ed-v9" class="chart tall"></div></div>
+    <div class="card col-5"><div class="card-title">Воронка потенциала чумового капитала</div><div id="c-a-funnel" class="chart tall"></div></div>
+    <div class="card col-7"><div class="card-title">Прогноз получателей ЧК, 2025–2030, семей</div><div id="c-a-fc" class="chart tall"></div></div>
+  </div></div>
+
+  <div class="lead-band"><div class="sec-no">02 · КМНС · демография и движение населения</div>
+    <div class="sec-title">Структура и динамика населения, ведущего ТОЖ</div>
+    <div class="sec-say">Половозрастной состав, движение реестра ТОЖ, переход на оседлый образ жизни, обеспеченность жильём и малоимущие.</div></div>
+  <div class="kpirow">
+    <div class="kpi green"><div class="l">Включено в реестр (2025)</div><div class="v" id="a-in">+681</div><div class="s">человек</div></div>
+    <div class="kpi red"><div class="l">Выбыло из реестра (2025)</div><div class="v" id="a-out">−313</div><div class="s">человек</div></div>
+    <div class="kpi accent"><div class="l">Нетто-прирост (2025)</div><div class="v" id="a-net">+368</div><div class="s">человек</div></div>
+    <div class="kpi cyan"><div class="l">Численность ТОЖ</div><div class="v" id="a-pop">17 868</div><div class="s">человек в реестре</div></div>
+  </div>
+  <div class="kpirow">
+    <div class="kpi"><div class="l">Инвалиды из числа КМНС</div><div class="v pend">— ожидает</div><div class="s">расчёт из файла «социально беззащитные»</div></div>
+    <div class="kpi"><div class="l">Сироты из числа КМНС</div><div class="v pend">— ожидает</div><div class="s">расчёт из файла «социально беззащитные»</div></div>
+    <div class="kpi"><div class="l">Ветераны из числа КМНС</div><div class="v pend">— ожидает</div><div class="s">расчёт из файла «социально беззащитные»</div></div>
+  </div>
+  <div class="wrap"><div class="grid">
+    <div class="card col-6"><div class="card-title">Половозрастная структура населения ТОЖ, чел.</div><div id="c-a-pyr" class="chart tall"></div></div>
+    <div class="card col-6"><div class="card-title">Население ТОЖ по годам, чел.</div><div id="c-a-pop" class="chart tall"></div></div>
+    <div class="card col-6"><div class="card-title">Переход с ТОЖ на оседлый по годам, чел.</div><div id="c-a-sed" class="chart"></div></div>
+    <div class="card col-6"><div class="card-title">Переход с ТОЖ на оседлый по возрасту, чел.</div><div id="c-a-sedage" class="chart"></div></div>
+    <div class="card col-12"><div class="card-title">Выбывшие и включённые в реестр ТОЖ КМНС, 2025–2026, чел.</div><div id="c-a-move" class="chart"></div></div>
+    <div class="card col-6"><div class="card-title">Обеспеченность жильём, доля семей %</div><div id="c-a-house" class="chart"></div></div>
+    <div class="card col-6"><div class="card-title">Малоимущие среди ТОЖ, число лиц по годам</div><div id="c-a-mal" class="chart"></div></div>
+  </div></div>
+
+  <div class="lead-band"><div class="sec-no">03 · Оленеводство и мясо</div>
+    <div class="sec-title">Занятость и заготовка мяса</div>
+    <div class="sec-say">Категории занятости ТОЖ, динамика сдачи мяса и план/факт по муниципальным образованиям. Данные по мясу — предварительные.</div></div>
+  <div class="kpirow">
+    <div class="kpi accent"><div class="l">Занято в оленеводстве</div><div class="v" id="a-olen">3 342</div><div class="s">семей / хозяйств</div></div>
+    <div class="kpi cyan"><div class="l">Вовлечено в сдачу мяса</div><div class="v" id="a-meatfam">1 150</div><div class="s">цель 1 315 к 2030</div></div>
+    <div class="kpi orange"><div class="l">Выполнение плана по мясу</div><div class="v" id="a-meatp">86%</div><div class="s">план 3 399 т</div></div>
+    <div class="kpi green"><div class="l">Сдано мяса на убой</div><div class="v" id="a-meat">2 939 т</div><div class="s">за сезон</div></div>
+  </div>
+  <div class="wrap"><div class="grid">
+    <div class="card col-4"><div class="card-title">Категории занятости ТОЖ</div><div id="c-a-occ" class="chart tall"></div></div>
+    <div class="card col-4"><div class="card-title">Динамика сдачи мяса, тонн</div><div id="c-a-meatdyn" class="chart tall"></div></div>
+    <div class="card col-4"><div class="card-title">План / факт сдачи мяса по МО</div><div id="c-a-meatmo" class="chart tall"></div></div>
+  </div></div>
+</section>
+
+<section id="tab-edu" class="tabpane hidden">
+
+  <!-- 04.1 КОЛЛЕДЖИ -->
+  <div class="lead-band"><div class="sec-no">04.1 · Колледжи ЯНАО</div>
+    <div class="sec-title">Обучающиеся из числа КМНС и ТОЖ в колледжах округа</div>
+    <div class="sec-say">Контингент КМНС и ТОЖ по 6 колледжам, механизмы финансирования, программы обучения и меры обеспечения (сводно по округу).</div></div>
+  <div class="kpirow">
+    <div class="kpi cyan"><div class="l">Доля обучающихся из числа КМНС (ТОЖ)</div><div class="v">28,6%</div><div class="s">от всех обучающихся</div></div>
+    <div class="kpi accent"><div class="l">Всего обучающихся из числа КМНС</div><div class="v">1 459</div><div class="s">в 6 колледжах ЯНАО</div></div>
+    <div class="kpi green"><div class="l">В том числе из семей ТОЖ</div><div class="v">310</div><div class="s">традиционный образ жизни</div></div>
+    <div class="kpi orange"><div class="l">Программы подготовки</div><div class="v">1 399</div><div class="s">936 · 454 · 9 по типам</div></div>
+  </div>
+  <div class="wrap"><div class="grid">
+    <div class="card col-7"><div class="card-title">Обучающиеся по колледжам: доля КМНС(ТОЖ) · всего · КМНС · в т.ч. ТОЖ</div>
+      <div class="tscroll"><table class="tbl" id="t-coll"></table></div></div>
+    <div class="card col-5"><div class="card-title">Проживание и обеспечение: КМНС / ТОЖ, чел.</div><div id="c-ed-liv" class="chart tall"></div></div>
+    <div class="card col-6"><div class="card-title">Варианты обучения по финансированию, чел.</div><div id="c-ed-fin" class="chart"></div></div>
+    <div class="card col-6"><div class="card-title">Программы обучения, чел.</div><div id="c-ed-prog" class="chart"></div></div>
+  </div></div>
+
+  <!-- 04.2 ВЫПУСКНИКИ -->
+  <div class="lead-band"><div class="sec-no">04.2 · Выпускники 9 и 11 классов</div>
+    <div class="sec-title" id="ed-title">Выпускники: после 9 класса 91% продолжают обучение, после 11 класса — 88%</div>
+    <div class="sec-say">Итоги выпуска и траектории 9 и 11 классов. Выберите район в фильтре — значения пересчитываются по разрезу.</div></div>
+  <div class="kpirow">
+    <div class="kpi accent"><div class="l">Выпускников 9 класса</div><div class="v" id="ed-v9">1 891</div><div class="s">всего по округу</div></div>
+    <div class="kpi green"><div class="l">Продолжили обучение после 9 кл.</div><div class="v" id="ed-c9">91%</div><div class="s">10 класс + СПО</div></div>
+    <div class="kpi orange"><div class="l">Выпускников 11 класса</div><div class="v" id="ed-v11">598</div><div class="s">всего по округу</div></div>
+    <div class="kpi cyan"><div class="l">Поступили в ВУЗ (11 кл.)</div><div class="v" id="ed-vuz">380</div><div class="s">после 11 класса</div></div>
+  </div>
+  <div class="wrap"><div class="grid">
+    <div class="card col-6"><div class="card-title">Куда пошли выпускники 9 класса, чел.</div><div id="c-ed-v9" class="chart tall"></div></div>
+    <div class="card col-6"><div class="card-title">Куда пошли выпускники 11 класса, чел.</div><div id="c-ed-v11" class="chart tall"></div></div>
     <div class="card col-12"><div class="card-title">Траектории выпускников 9 и 11 классов после выпуска</div><div id="c-ed-sankey" class="chart tall"></div></div>
+  </div></div>
+
+  <!-- 04.3 УСПЕШНЫЙ СТАРТ -->
+  <div class="lead-band"><div class="sec-no">04.3 · Успешный старт (постинтернатное сопровождение)</div>
+    <div class="sec-title">Сопровождение выпускников интернатов: поступление и трудоустройство</div>
+    <div class="sec-say">Программа сопровождения выпускников пришкольных интернатов при поступлении и трудоустройстве (сводно по округу).</div></div>
+  <div class="kpirow">
+    <div class="kpi accent"><div class="l">Всего учеников на сопровождении</div><div class="v">48</div><div class="s">выпускники интернатов</div></div>
+    <div class="kpi green"><div class="l">Поступили в СУЗ / ВУЗ</div><div class="v">47</div><div class="s">98% участников</div></div>
+    <div class="kpi cyan"><div class="l">Поступили в ВУЗ</div><div class="v">7</div><div class="s">остальные — в СУЗ</div></div>
+    <div class="kpi orange"><div class="l">Трудоустроены / ведут ТОЖ</div><div class="v">5</div><div class="s">не продолжили обучение</div></div>
+  </div>
+  <div class="wrap"><div class="grid">
+    <div class="card col-6"><div class="card-title">Поступление выпускников: СУЗ / ВУЗ / не поступили, чел.</div><div id="c-ed-post" class="chart"></div></div>
+    <div class="card col-6"><div class="card-title">Род занятий не продолживших обучение, чел.</div><div id="c-ed-work" class="chart"></div></div>
+  </div></div>
+
+  <!-- 04.4 СТИПЕНДИЯ -->
+  <div class="lead-band"><div class="sec-no">04.4 · Именная стипендия Губернатора</div>
+    <div class="sec-title">Заявки, назначения и одобрение именной стипендии по учебным годам</div>
+    <div class="sec-say">Динамика заявившихся и получивших стипендию, средний процент одобрения (сводно по округу).</div></div>
+  <div class="kpirow">
+    <div class="kpi accent"><div class="l">Заявившихся студентов (2024/25)</div><div class="v">135</div><div class="s">за 5 лет рост в 2,5 раза</div></div>
+    <div class="kpi green"><div class="l">Получили стипендию (2024/25)</div><div class="v">112</div><div class="s">пик 172 в 2023/24</div></div>
+    <div class="kpi cyan"><div class="l">Средний % одобрения</div><div class="v">57,3%</div><div class="s">за весь период</div></div>
+    <div class="kpi orange"><div class="l">Подъёмные «80 000 ₽»</div><div class="v">21</div><div class="s">19 из семей ТОЖ</div></div>
+  </div>
+  <div class="wrap"><div class="grid">
+    <div class="card col-7"><div class="card-title">Заявившиеся и получившие стипендию + % одобрения по учебным годам</div><div id="c-ed-stip" class="chart tall"></div></div>
+    <div class="card col-5"><div class="card-title">Структура получателей стипендии, чел.</div><div id="c-ed-stipstr" class="chart tall"></div></div>
+  </div></div>
+
+  <!-- 04.5 КОЧЕВЫЕ ПЕДАГОГИ -->
+  <div class="lead-band"><div class="sec-no">04.5 · Кочевые педагоги</div>
+    <div class="sec-title">Подготовка кочевых педагогов по программам-периодам</div>
+    <div class="sec-say">Число студентов программ подготовки кочевых педагогов и стоимость обучения (сводно по округу).</div></div>
+  <div class="kpirow">
+    <div class="kpi accent"><div class="l">Студентов в программе 2025–2029</div><div class="v">10</div><div class="s">кочевые педагоги</div></div>
+    <div class="kpi cyan"><div class="l">Всего за 3 периода</div><div class="v">29</div><div class="s">2017–2029</div></div>
+    <div class="kpi green"><div class="l">Сумма на весь срок (2025–2029)</div><div class="v">8,8 млн ₽</div><div class="s">финансирование программы</div></div>
+    <div class="kpi orange"><div class="l">На 1 студента в год</div><div class="v">220 тыс ₽</div><div class="s">рост к предыдущим периодам</div></div>
+  </div>
+  <div class="wrap"><div class="grid">
+    <div class="card col-6"><div class="card-title">Количество студентов по программам-периодам, чел.</div><div id="c-ed-ped" class="chart"></div></div>
+    <div class="card col-6"><div class="card-title">Стоимость обучения: на весь срок и на 1 студента/год</div><div id="c-ed-pedcost" class="chart"></div></div>
+  </div></div>
+
+  <!-- 04.6 ПРЕДШКОЛЬНАЯ -->
+  <div class="lead-band"><div class="sec-no">04.6 · Предшкольная подготовка</div>
+    <div class="sec-title">Охват предшкольной подготовкой и её формы</div>
+    <div class="sec-say">Траектория охвата к цели 50% (2030) и формы подготовки. Формы пересчитываются по выбранному району.</div></div>
+  <div class="kpirow">
+    <div class="kpi accent"><div class="l">Дошкольников всего</div><div class="v" id="ed-dosh">999</div><div class="s">целевая группа</div></div>
+    <div class="kpi cyan"><div class="l">Охват предшкольной подготовкой</div><div class="v">30%</div><div class="s">цель 50% к 2030 г.</div></div>
+    <div class="kpi green"><div class="l">В кочевых детских садах</div><div class="v" id="ed-koch">205</div><div class="s">кочевая форма</div></div>
+    <div class="kpi orange"><div class="l">В подготовительных классах</div><div class="v" id="ed-podg">300</div><div class="s">на базе школ</div></div>
+  </div>
+  <div class="wrap"><div class="grid">
+    <div class="card col-7"><div class="card-title">Траектория охвата предшкольной подготовкой к цели 50% (2030), %</div><div id="c-ed-presch" class="chart tall"></div></div>
+    <div class="card col-5"><div class="card-title">Формы предшкольной подготовки (разрез), чел.</div><div id="c-ed-preform" class="chart tall"></div></div>
+  </div></div>
+
+  <!-- 04.7 ИНТЕРНАТЫ -->
+  <div class="lead-band"><div class="sec-no">04.7 · Интернатное сопровождение</div>
+    <div class="sec-title">Обучающиеся из кочевых семей в пришкольных интернатах</div>
+    <div class="sec-say">Занятость мест, обеспеченность и психолого-педагогическое сопровождение. Пересчитывается по выбранному району.</div></div>
+  <div class="kpirow">
+    <div class="kpi accent"><div class="l">Проживают в интернатах</div><div class="v" id="ed-int">2 013</div><div class="s">обучающиеся ТОЖ</div></div>
+    <div class="kpi cyan"><div class="l">Мест в интернатах</div><div class="v" id="ed-intm">2 220</div><div class="s" id="ed-intf">свободно 207</div></div>
+    <div class="kpi green"><div class="l">Обеспеченность местами</div><div class="v" id="ed-intp">110%</div><div class="s">мест на потребность</div></div>
+    <div class="kpi orange"><div class="l">Педагоги-воспитатели</div><div class="v">134</div><div class="s">сопровождение 92%</div></div>
+  </div>
+  <div class="wrap"><div class="grid">
+    <div class="card col-6"><div class="card-title">Места в интернатах: заняты / свободны (разрез), чел.</div><div id="c-ed-intbar" class="chart"></div></div>
+    <div class="card col-6"><div class="card-title">Занятость мест в интернатах, %</div><div id="c-ed-intg" class="chart"></div></div>
+  </div></div>
+</section>
+<section id="tab-roadmap" class="tabpane hidden">
+  <div class="lead-band"><div class="sec-no">Дорожная карта до 2030 · целевые ориентиры №№ 1–10</div>
+    <div class="sec-title">Исполнение ориентиров: база 2020 → план 2026 → факт 01.07.2026</div>
+    <div class="sec-say">Статус исполнения, отклонение факта от плана и тренд по каждому ориентиру. Обновление — ежеквартально.</div></div>
+  <div class="kpirow">
+    <div class="kpi ico"><div class="ic" style="background:var(--green)">✓</div>
+      <div class="tx"><div class="l">В графике</div><div class="v" id="k-ok" style="color:var(--green)">3</div><div class="s">ориентиров из 10</div></div></div>
+    <div class="kpi ico"><div class="ic" style="background:var(--orange)">!</div>
+      <div class="tx"><div class="l">Отклонение до 10%</div><div class="v" id="k-warn" style="color:var(--orange)">4</div><div class="s">требуют внимания</div></div></div>
+    <div class="kpi ico"><div class="ic" style="background:var(--red)">↓</div>
+      <div class="tx"><div class="l">Отставание</div><div class="v" id="k-bad" style="color:var(--red)">3</div><div class="s">требуют мер</div></div></div>
+    <div class="kpi ico"><div class="ic" style="background:var(--cyan)">%</div>
+      <div class="tx"><div class="l">Среднее отклонение от плана 2026</div><div class="v" id="k-dev" style="color:var(--indigo)">−11,5%</div><div class="s">по всем ориентирам</div></div></div>
+  </div>
+  <div class="wrap"><div class="grid">
+    <div class="card col-8"><div class="card-title">Отклонение факта от плана 2026, % (ориентиры с числовым планом)</div>
+      <div id="c-dk-dev" class="chart tall"></div>
+      <div class="tnote">отрицательное значение — недовыполнение плана</div></div>
+    <div class="card col-4"><div class="card-title">Статус исполнения ориентиров</div><div id="c-dk-st" class="chart tall"></div></div>
+    <div class="card col-12"><div class="card-title">Тренд отклонения от плана (среднее значение по ориентирам с числовым планом), %</div>
+      <div id="c-dk-tr" class="chart"></div></div>
+    <div class="card col-12"><div class="card-title">План / факт по всем ориентирам</div>
+      <div class="tscroll"><table class="tbl" id="t-dk"></table></div>
+      <div class="tnote">План 2026 — значения из утверждённой дорожной карты; ориентир № 1 в 2026 году — в режиме «мониторинг» (целевое значение — менее 3 000 к 2030).</div></div>
   </div></div>
 </section>
 
 <div class="footer">
   <span class="badge">РСУД BI</span>
-  <span>ГИС «АРГИШ» · ЯНАО · данные на 2025 год</span>
-  <span class="src">Часть оперативных значений (поголовье, мясо, занятость, обеспеченность по позициям) смоделирована по трендам и сведена к итогам округа.</span>
+  <span>ГИС «АРГИШ» / дорожная карта КМНС ЯНАО до 2030 · данные на 2025 год</span>
+  <span class="src">Целевые ориентиры — из официальной дорожной карты. Часть оперативных значений (поголовье, разбивка мяса и позиций, занятость, кочевые выплаты) смоделирована по трендам и сведена к итогам округа.</span>
 </div>
 
 <script>
@@ -170,43 +404,91 @@ function ru(n,d){return n.toLocaleString("ru-RU",{maximumFractionDigits:d==null?
 
 const MOALL=["Ямальский","Тазовский","Пуровский","Приуральский","Надымский","Шурышкарский","Красноселькупский","г. Салехард"];
 const D={
- "Ямальский":{koch:4680,polu:1146,nen:5590,han:210,sel:26,famTotal:1640,famMal:180,deer:240000,meatFact:1180,occOlen:1340,occFish:520,occHunt:210,occOther:340,kochVyp:1180,housV:337,housN:174,housH:163,v9:365,v9_10:216,v9_spo:144,v11:88,v11_vuz:51,v11_spo:29,cStd:92,cChum:88,cKoch:85},
- "Тазовский":{koch:3760,polu:1188,nen:4610,han:120,sel:218,famTotal:1400,famMal:150,deer:210000,meatFact:742,occOlen:1120,occFish:480,occHunt:180,occOther:300,kochVyp:1000,housV:431,housN:386,housH:45,v9:181,v9_10:60,v9_spo:72,v11:21,v11_vuz:8,v11_spo:11,cStd:78,cChum:72,cKoch:70},
- "Пуровский":{koch:1780,polu:824,nen:2180,han:120,sel:304,famTotal:740,famMal:60,deer:55000,meatFact:315,occOlen:310,occFish:260,occHunt:120,occOther:200,kochVyp:420,housV:182,housN:39,housH:143,v9:123,v9_10:42,v9_spo:66,v11:24,v11_vuz:5,v11_spo:16,cStd:90,cChum:85,cKoch:88},
- "Приуральский":{koch:1690,polu:886,nen:1980,han:560,sel:36,famTotal:700,famMal:80,deer:70000,meatFact:392,occOlen:330,occFish:360,occHunt:140,occOther:220,kochVyp:430,housV:346,housN:268,housH:78,v9:196,v9_10:40,v9_spo:90,v11:52,v11_vuz:12,v11_spo:15,cStd:84,cChum:80,cKoch:82},
- "Надымский":{koch:560,polu:262,nen:690,han:110,sel:22,famTotal:240,famMal:30,deer:32000,meatFact:168,occOlen:145,occFish:150,occHunt:60,occOther:120,kochVyp:170,housV:71,housN:18,housH:53,v9:25,v9_10:6,v9_spo:19,v11:0,v11_vuz:0,v11_spo:0,cStd:88,cChum:83,cKoch:86},
- "Шурышкарский":{koch:395,polu:263,nen:120,han:520,sel:18,famTotal:195,famMal:50,deer:18000,meatFact:92,occOlen:72,occFish:180,occHunt:80,occOther:110,kochVyp:150,housV:95,housN:29,housH:66,v9:182,v9_10:89,v9_spo:78,v11:48,v11_vuz:22,v11_spo:22,cStd:74,cChum:68,cKoch:72},
- "Красноселькупский":{koch:66,polu:109,nen:24,han:15,sel:136,famTotal:145,famMal:35,deer:9000,meatFact:40,occOlen:17,occFish:100,occHunt:40,occOther:50,kochVyp:40,housV:58,housN:23,housH:35,v9:31,v9_10:18,v9_spo:12,v11:10,v11_vuz:1,v11_spo:9,cStd:70,cChum:60,cKoch:65},
- "г. Салехард":{koch:44,polu:29,nen:52,han:18,sel:3,famTotal:43,famMal:15,deer:2000,meatFact:19,occOlen:8,occFish:20,occHunt:10,occOther:20,kochVyp:8,housV:13,housN:8,housH:5,v9:788,v9_10:461,v9_spo:316,v11:357,v11_vuz:282,v11_spo:46,cStd:95,cChum:90,cKoch:92}
+ "Ямальский":       {koch:4680,polu:1146,nen:5590,han:210,sel:26,famTotal:1640,famMnog:620,famMal:180,deer:240000,meatPlan:1224,meatFact:1180,occOlen:1340,occFish:520,occHunt:210,occOther:340,kochVyp:1180,chum:91.4,std:22050,housV:337,housN:174,housH:163,pred:211,v9:365,v9_10:216,v9_spo:144,v11:88,v11_vuz:51,v11_spo:29},
+ "Тазовский":       {koch:3760,polu:1188,nen:4610,han:120,sel:218,famTotal:1400,famMnog:540,famMal:150,deer:210000,meatPlan:1061,meatFact:742,occOlen:1120,occFish:480,occHunt:180,occOther:300,kochVyp:1000,chum:48.6,std:34199,housV:431,housN:386,housH:45,pred:32,v9:181,v9_10:60,v9_spo:72,v11:21,v11_vuz:8,v11_spo:11},
+ "Пуровский":       {koch:1780,polu:824,nen:2180,han:120,sel:304,famTotal:740,famMnog:240,famMal:60,deer:55000,meatPlan:326,meatFact:315,occOlen:310,occFish:260,occHunt:120,occOther:200,kochVyp:420,chum:26.8,std:10150,housV:182,housN:39,housH:143,pred:149,v9:123,v9_10:42,v9_spo:66,v11:24,v11_vuz:5,v11_spo:16},
+ "Приуральский":    {koch:1690,polu:886,nen:1980,han:560,sel:36,famTotal:700,famMnog:250,famMal:80,deer:70000,meatPlan:408,meatFact:392,occOlen:330,occFish:360,occHunt:140,occOther:220,kochVyp:430,chum:34.2,std:15875,housV:346,housN:268,housH:78,pred:87,v9:196,v9_10:40,v9_spo:90,v11:52,v11_vuz:12,v11_spo:15},
+ "Надымский":       {koch:560,polu:262,nen:690,han:110,sel:22,famTotal:240,famMnog:90,famMal:30,deer:32000,meatPlan:177,meatFact:168,occOlen:145,occFish:150,occHunt:60,occOther:120,kochVyp:170,chum:18.4,std:6546,housV:71,housN:18,housH:53,pred:2,v9:25,v9_10:6,v9_spo:19,v11:0,v11_vuz:0,v11_spo:0},
+ "Шурышкарский":    {koch:395,polu:263,nen:120,han:520,sel:18,famTotal:195,famMnog:120,famMal:50,deer:18000,meatPlan:122,meatFact:92,occOlen:72,occFish:180,occHunt:80,occOther:110,kochVyp:150,chum:12.1,std:5204,housV:95,housN:29,housH:66,pred:24,v9:182,v9_10:89,v9_spo:78,v11:48,v11_vuz:22,v11_spo:22},
+ "Красноселькупский":{koch:66,polu:109,nen:24,han:15,sel:136,famTotal:145,famMnog:95,famMal:35,deer:9000,meatPlan:61,meatFact:40,occOlen:17,occFish:100,occHunt:40,occOther:50,kochVyp:40,chum:5.3,std:2075,housV:58,housN:23,housH:35,pred:27,v9:31,v9_10:18,v9_spo:12,v11:10,v11_vuz:1,v11_spo:9},
+ "г. Салехард":     {koch:44,polu:29,nen:52,han:18,sel:3,famTotal:43,famMnog:45,famMal:15,deer:2000,meatPlan:20,meatFact:19,occOlen:8,occFish:20,occHunt:10,occOther:20,kochVyp:8,chum:3.2,std:569,housV:13,housN:8,housH:5,pred:0,v9:788,v9_10:461,v9_spo:316,v11:355,v11_vuz:281,v11_spo:45}
 };
-const CANON={pop:17711,koch:12892,fam:5103,nen:15408,han:1859,sel:444,famMalPersons:4919};
-// СПО поступившие/выпустившиеся по годам (модель по тренду)
-const SPO_YEARS=["2021","2022","2023","2024","2025"], SPO_IN=[720,760,810,845,880], SPO_OUT=[520,560,600,640,690];
-const SUP_ROWS=[
-  {name:"Возмещение стоимости ТМЦ (рег. стандарт)",tot:7860},
-  {name:"Возмещение расходов на найм жилья (ЕПГУ)",tot:2060},
-  {name:"ГСМ для мини-электростанции",tot:1000},
-  {name:"Выплата допсоцстипендий",tot:832},
-  {name:"«Чумовой капитал»",tot:420},
-  {name:"Единовременное пособие («подъёмные»)",tot:52}];
+Object.entries({"Ямальский": {"cStd": 92, "cChum": 88, "cKoch": 85, "dosh": 290, "doshKoch": 78, "doshPodg": 92, "intL": 640, "intM": 700}, "Тазовский": {"cStd": 78, "cChum": 72, "cKoch": 70, "dosh": 250, "doshKoch": 60, "doshPodg": 74, "intL": 560, "intM": 610}, "Пуровский": {"cStd": 90, "cChum": 85, "cKoch": 88, "dosh": 120, "doshKoch": 24, "doshPodg": 38, "intL": 260, "intM": 290}, "Приуральский": {"cStd": 84, "cChum": 80, "cKoch": 82, "dosh": 130, "doshKoch": 26, "doshPodg": 44, "intL": 280, "intM": 310}, "Надымский": {"cStd": 88, "cChum": 83, "cKoch": 86, "dosh": 75, "doshKoch": 9, "doshPodg": 26, "intL": 120, "intM": 140}, "Шурышкарский": {"cStd": 74, "cChum": 68, "cKoch": 72, "dosh": 78, "doshKoch": 5, "doshPodg": 16, "intL": 110, "intM": 125}, "Красноселькупский": {"cStd": 70, "cChum": 60, "cKoch": 65, "dosh": 40, "doshKoch": 3, "doshPodg": 8, "intL": 38, "intM": 42}, "г. Салехард": {"cStd": 95, "cChum": 90, "cKoch": 92, "dosh": 16, "doshKoch": 0, "doshPodg": 2, "intL": 5, "intM": 8}}).forEach(([k,v])=>Object.assign(D[k],v));
+const CANON={pop:17711,koch:12892,polu:4819,oced:1948,fam:5103,famMnog:2000,famMal:600,nen:15408,han:1859,sel:444};
 
-const G={mo:"Сводно по округу"};
+const YEARS=["2020","2021","2022","2023","2024","2025","2026"];
+const POP_YEARS=[10961,11603,12303,16863,17356,17711,17855];
+const DEER_YEARS=[610,635,648,655,642,638,636];
+const AGE_GROUPS=["0–6","7–18","19–36","37–50","51–70","71+"];
+const AGE_M=[1597,2149,2721,1567,1163,386], AGE_F=[1337,1788,2187,1276,1198,491];
+const FACT_CNT={"Ямальский":13,"Тазовский":8,"Приуральский":5,"Пуровский":1,"Надымский":0,"Шурышкарский":0,"Красноселькупский":0,"г. Салехард":0};
+const FACT_SERV={"Ямальский":10800,"Тазовский":4500,"Пуровский":172,"Приуральский":4530,"Надымский":0,"Шурышкарский":0,"Красноселькупский":0,"г. Салехард":0};
+
+// позиции выплат (детализация)
+const STD_POS=[["Топливо (ГСМ, электростанции)",22000],["Продукты питания",18500],["Материалы для чума (нюки, шесты)",14000],["Транспорт (снегоходы, моторы)",16000],["Одежда и экипировка",9500],["Средства связи и навигация",6500],["Медикаменты и аптечки",4200],["Прочие ТМЦ",5968]];
+const CHUM_POS=[["Нюки (покрытие чума)",78],["Шесты и каркас",34],["Печь и дымоход",22],["Нарты",28],["Спальные принадлежности",26],["Утварь и посуда",18],["Транспорт (мотор/снегоход)",24],["Прочее",10]];
+
+const GSM_YEAR={"2022":35.8,"2023":36.4,"2024":36.0,"2025":19.0};
+const MAL_YEARS_CAT=["2020","2022","2023","2024","2025"], MAL_YEARS_VAL=[12043,10354,10698,4977,4919];
+const STIP_SEASONS=["2019–20","2020–21","2021–22","2022–23","2023–24","2024–25"], STIP_GET=[10,10,59,154,172,112], STIP_APPLY=[54,48,94,170,207,135];
+const NAJM_PERIODS=["2011–2015","2016–2019","2020–2022","2023–2024","2025–2026"], NAJM_VAL=[120,340,560,610,430];
+const SUP_PERIODS=["1999–2010","2011–2015","2016–2019","2020–2022","2023–2024","2025–2026"];
+const SUP_ROWS=[
+  {name:"Возмещение расходов на найм жилья (ЕПГУ)",v:[0,120,340,560,610,430]},
+  {name:"Возмещение стоимости ТМЦ (региональный стандарт)",v:[210,890,1640,2180,2360,1780]},
+  {name:"Выплата допсоцстипендий",v:[0,40,110,207,340,135]},
+  {name:"«Чумовой капитал»",v:[0,0,58,132,148,82]},
+  {name:"ГСМ для мини-электростанции",v:[0,60,180,260,290,210]},
+  {name:"Единовременное пособие («подъёмные»)",v:[0,0,0,12,21,19]}];
+
+const MONTHS=["Янв","Фев","Мар","Апр","Май","Июн","Июл","Авг","Сен","Окт","Ноя","Дек"];
+const IN_MONTH=[40,44,58,64,52,60,46,54,66,74,80,62];
+const OUT_MONTH=[40,48,56,44,52,64,50,60,58,70,99,320];
+const MOVE_YEARS_CAT=["2020","2021","2022","2023","2024","2025"], MOVE_YEARS_VAL=[180,240,300,410,280,485];
+const MOVE_AGE_CAT=["0–10","11–20","21–40","41–50","51+"], MOVE_AGE_VAL=[96,78,180,64,67];
+
+// образование
+const ED_PROGRAMS=[["Подготовка к 1-му классу",532],["В подготовительных классах",300],["В кочевых детских садах",205]];
+const ED_PRED_TRAJ=[33,35,37,40,45,50]; // 2025..2030
+const ED_COLLEGES=[["Ямальский многопрофильный",47.5],["Ноябрьский колледж проф. и ИТ",100.0],["Тарко-Салинский профессиональный",26.5],["Новоуренгойский многопрофильный",12.2],["Надымский профессиональный",10.8],["Муравленковский многопрофильный",2.0]];
+
+// дорожная карта: [2020база(или null), 2025,2026,2027,2028,2029,2030]
+const RM=[
+ {n:"Число малоимущих граждан ТОЖ, чел.",base:12043,tr:[4919,4600,4200,3800,3400,3000],u:"",goal:"< 3 000",down:true},
+ {n:"Доля семей с поголовьем, вовлечённых в сдачу мяса, %",base:26,tr:[35,36,37,38,39,40],u:"%",goal:"40%"},
+ {n:"Выход туш без ограничений вет-сан экспертизы, %",base:null,tr:[85,85.5,86,86.5,87,87.5],u:"%",goal:"87,5%"},
+ {n:"Семей интегрировано в город (жильё + работа)",base:0,tr:[0,0,5,20,35,50],u:"",goal:"50"},
+ {n:"Доля выпускников 9/11 кл. продолживших обучение, %",base:72,tr:[87,87,88,89,89,90],u:"%",goal:"90%"},
+ {n:"Охват медицинской помощью, %",base:45,tr:[50,50,55,60,65,70],u:"%",goal:"70%"},
+ {n:"Бизнес-проекты участников ТОЖ, ед.",base:11,tr:[5,5,10,10,13,15],u:"",goal:"+15"},
+ {n:"Сокращение очередности на региональный стандарт, %",base:0,tr:[0,5,10,15,20,20],u:"%",goal:"20%"},
+ {n:"Доля мероприятий, отражённых в дашбордах, %",base:0,tr:[10,30,40,50,60,70],u:"%",goal:"70%"},
+ {n:"Доля граждан ТОЖ, одобривших меры поддержки, %",base:0,tr:[80,80,80,85,85,90],u:"%",goal:"90%"},
+ {n:"Фактический объём заготовки мяса, тонн",base:null,tr:[3400,3450,3500,3550,3600,3600],u:" т",goal:"3 600 т"},
+ {n:"Семей, вовлечённых в заготовку мяса",base:null,tr:[1150,1183,1216,1249,1282,1315],u:"",goal:"1 315"},
+ {n:"Кочевые выплаты в проактивном режиме, %",base:null,tr:[60,70,80,90,100,100],u:"%",goal:"100%"},
+ {n:"Охват предшкольной подготовкой, %",base:null,tr:[33,35,37,40,45,50],u:"%",goal:"50%"}
+];
+const RM_YEARS=["2025","2026","2027","2028","2029","2030"];
+
+const G={mo:"Сводно по округу",year:"2025"};
 const isAll=()=>G.mo==="Сводно по округу";
 const scope=()=>isAll()?MOALL:[G.mo];
+function hiC(name){return (!isAll()&&name===G.mo)?C.orange:(MO_COLOR[name]||C.indigo);}
+
 const charts={};
 function mk(id){const el=document.getElementById(id);if(!el)return null;let c=charts[id];if(!c){c=echarts.init(el);charts[id]=c;}return c;}
 const grid={left:12,right:18,top:38,bottom:24,containLabel:true};
-const gridH={left:12,right:26,top:20,bottom:24,containLabel:true};
+const gridH={left:12,right:26,top:38,bottom:24,containLabel:true};
 const legend={top:6,textStyle:bt,itemWidth:12,itemHeight:12,icon:"roundRect"};
 const splitL={lineStyle:{color:"#eef2f7"}};
 function T(id,v){const e=document.getElementById(id);if(e)e.textContent=v;}
-function hiC(name){return (!isAll()&&name===G.mo)?C.orange:(MO_COLOR[name]||C.indigo);}
 function donut(id,total,parts,colors){
   const c=mk(id);if(!c)return;const m={};parts.forEach(p=>m[p.name]=p.value);
   c.setOption({color:colors,tooltip:{trigger:"item",confine:true,formatter:p=>`${p.name}<br/><b>${nf(p.value)}</b> (${p.percent}%)`},
     legend:{bottom:0,textStyle:bt,icon:"circle",formatter:n=>`${n} — ${nf(m[n])}`},
-    title:{text:"Итого\n"+nf(total),left:"center",top:"40%",textAlign:"center",textStyle:{fontSize:14,fontWeight:700,color:C.indigo,lineHeight:17}},
-    series:[{type:"pie",radius:["54%","74%"],center:["50%","45%"],avoidLabelOverlap:true,label:{show:true,formatter:"{d}%",color:"#48566c",fontSize:11},labelLine:{length:6,length2:8},data:parts}]},true);
+    title:{text:"Итого\n"+nf(total),left:"center",top:"39%",textAlign:"center",textStyle:{fontSize:14,fontWeight:700,color:C.indigo,lineHeight:17}},
+    series:[{type:"pie",radius:["54%","74%"],center:["50%","43%"],avoidLabelOverlap:true,label:{show:true,formatter:"{d}%",color:"#48566c",fontSize:11},labelLine:{length:6,length2:8},data:parts}]},true);
 }
 function moBar(id,valOf,unit,fmt){
   const c=mk(id);if(!c)return;const arr=MOALL.map(k=>({k,v:valOf(k)})).sort((a,b)=>a.v-b.v);
@@ -220,123 +502,473 @@ function moBar(id,valOf,unit,fmt){
 /* 1 DEMO */
 function renderDemo(){
   const ks=scope();
-  const koch=isAll()?CANON.koch:D[G.mo].koch;
-  const pop=isAll()?CANON.pop:(D[G.mo].koch+D[G.mo].polu);
-  const oced=Math.round(pop*0.036);const polu=pop-koch-oced;
-  const fam=isAll()?CANON.fam:D[G.mo].famTotal;
-  const nen=isAll()?CANON.nen:D[G.mo].nen,han=isAll()?CANON.han:D[G.mo].han,sel=isAll()?CANON.sel:D[G.mo].sel,et=nen+han+sel;
-  T("d-pop",nf(pop));T("d-pop-s",isAll()?"человек в реестре":G.mo+" · человек");
-  T("d-avg",(fam?pop/fam:3.5).toFixed(1).replace(".",","));T("d-avg-s","чел. в семье · "+nf(fam)+" семей");
-  T("d-title",isAll()?"Традиционный образ жизни ведут 17 711 человек":"Разрез: "+G.mo+" — "+nf(pop)+" чел. ведут ТОЖ");
+  const koch=isAll()?CANON.koch:ks.reduce((s,k)=>s+D[k].koch,0),polu=isAll()?CANON.polu:ks.reduce((s,k)=>s+D[k].polu,0);
+  const pop=isAll()?CANON.pop:(koch+polu);
+  const fam=isAll()?CANON.fam:ks.reduce((s,k)=>s+D[k].famTotal,0);
+  const mnog=isAll()?CANON.famMnog:ks.reduce((s,k)=>s+D[k].famMnog,0);
+  const mal=isAll()?CANON.famMal:ks.reduce((s,k)=>s+D[k].famMal,0);
+  const nen=isAll()?CANON.nen:ks.reduce((s,k)=>s+D[k].nen,0),han=isAll()?CANON.han:ks.reduce((s,k)=>s+D[k].han,0),sel=isAll()?CANON.sel:ks.reduce((s,k)=>s+D[k].sel,0),et=nen+han+sel;
+  const yi=YEARS.indexOf(G.year);const popShown=isAll()?CANON.pop:pop;
+  T("d-pop",nf(popShown));T("d-pop-s",isAll()?"100% реестра · человек":G.mo+" · человек");
+  T("d-life",nf(koch));T("d-life-s","кочевой · "+ru(pop?koch/pop*100:0)+"% · полукоч. "+nf(polu));
+  T("d-fam",nf(fam));T("d-fam-s",nf(mnog)+" многодетных · "+nf(mal)+" малоимущих");
+  T("d-avg",(fam?(koch+polu)/fam:3.5).toFixed(1).replace(".",","));
+  const eM=[["Ненцы",nen],["Ханты",han],["Селькупы",sel]].sort((a,b)=>b[1]-a[1])[0];
+  T("d-etno",eM[0]);T("d-etno-s","≈ "+ru(et?eM[1]/et*100:0)+"% населения ТОЖ");
+  T("d-title",isAll()?"Традиционный образ жизни ведут 17 711 человек — почти три четверти кочуют":"Разрез: "+G.mo+" — "+nf(pop)+" чел. ведут ТОЖ");
+  donut("c-d-life",koch+polu,[{name:"Кочевой",value:koch},{name:"Полукочевой",value:polu}],[C.cyan,C.indigo]);
   donut("c-d-etno",et,[{name:"Ненцы",value:nen},{name:"Ханты",value:han},{name:"Селькупы",value:sel}],[C.indigo,C.cyan,C.green]);
-  donut("c-d-life",pop,[{name:"Кочевой",value:koch},{name:"Полукочевой",value:polu},{name:"Оседлый",value:oced}],[C.cyan,C.indigo,C.grey]);
-  const d=MOALL.map(k=>({mo:k,v:D[k].koch+D[k].polu})).sort((a,b)=>a.v-b.v);
-  mk("c-d-mo").setOption({tooltip:{trigger:"axis",confine:true,axisPointer:{type:"shadow"}},grid:gridH,
+  const kf=isAll()?1:(pop/CANON.pop);
+  mk("c-d-age").setOption({color:[C.cyan,C.indigo],tooltip:{trigger:"axis",confine:true},legend:legend,grid:grid,
+    xAxis:{type:"category",data:AGE_GROUPS,axisLabel:bt},yAxis:{type:"value",axisLabel:bt,splitLine:splitL},
+    series:[{name:"Мужчины",type:"bar",data:AGE_M.map(v=>Math.round(v*kf)),barGap:0,barWidth:"38%",itemStyle:{borderRadius:[3,3,0,0]}},{name:"Женщины",type:"bar",data:AGE_F.map(v=>Math.round(v*kf)),barWidth:"38%",itemStyle:{borderRadius:[3,3,0,0]}}]},true);
+  const d=MOALL.map(k=>({mo:k,koch:D[k].koch,polu:D[k].polu})).sort((a,b)=>(a.koch+a.polu)-(b.koch+b.polu));
+  mk("c-d-mo").setOption({color:[C.cyan,C.indigo],tooltip:{trigger:"axis",confine:true,axisPointer:{type:"shadow"}},legend:legend,grid:gridH,
     xAxis:{type:"value",axisLabel:bt,splitLine:splitL},yAxis:{type:"category",data:d.map(x=>x.mo),axisLabel:bt},
-    series:[{type:"bar",data:d.map(x=>({value:x.v,itemStyle:{color:hiC(x.mo),borderRadius:[0,4,4,0]}})),barWidth:"62%",label:{show:true,position:"right",fontSize:10,color:"#6b7684",formatter:p=>nf(p.value)}}]},true);
+    series:[{name:"Кочевой",type:"bar",stack:"p",data:d.map(x=>({value:x.koch,itemStyle:{color:(!isAll()&&x.mo===G.mo)?C.orange:C.cyan}})),label:{show:true,color:"#fff",fontSize:10,formatter:p=>p.value>300?nf(p.value):""}},{name:"Полукочевой",type:"bar",stack:"p",data:d.map(x=>({value:x.polu,itemStyle:{color:(!isAll()&&x.mo===G.mo)?"#f0a860":C.indigo}}))}]},true);
+  const line=isAll()?POP_YEARS:POP_YEARS.map(v=>Math.round(v*kf));
+  mk("c-d-years").setOption({color:[C.cyan],tooltip:{trigger:"axis",confine:true},grid:grid,
+    xAxis:{type:"category",data:YEARS,axisLabel:bt,boundaryGap:false},yAxis:{type:"value",axisLabel:bt,splitLine:splitL},
+    series:[{type:"line",data:line,smooth:true,symbol:"circle",symbolSize:7,lineStyle:{width:3},areaStyle:{color:"rgba(63,182,211,.12)"},markPoint:{data:[{coord:[G.year,line[yi>=0?yi:5]]}],symbolSize:40,itemStyle:{color:C.orange}},label:{show:true,position:"top",fontSize:10,color:"#6b7684",formatter:p=>nf(p.value)}}]},true);
+  mk("c-d-fact").setOption({color:[C.indigo,C.cyan],tooltip:{trigger:"axis",confine:true,axisPointer:{type:"shadow"}},legend:legend,grid:{...grid,right:52},
+    xAxis:{type:"category",data:MOALL,axisLabel:{...bt,interval:0,rotate:22,fontSize:9}},
+    yAxis:[{type:"value",name:"факторий",nameTextStyle:bt,axisLabel:bt,splitLine:splitL},{type:"value",name:"чел.",nameTextStyle:bt,axisLabel:{...bt,formatter:v=>v>=1000?v/1000+"k":v},splitLine:{show:false}}],
+    series:[{name:"Факторий",type:"bar",data:MOALL.map(k=>({value:FACT_CNT[k],itemStyle:{color:hiC(k)}})),barWidth:"42%",itemStyle:{borderRadius:[3,3,0,0]},label:{show:true,position:"top",fontSize:10,color:"#6b7684"}},{name:"Обслужено, чел.",type:"line",yAxisIndex:1,data:MOALL.map(k=>FACT_SERV[k]),symbol:"circle",symbolSize:7,lineStyle:{width:2.5,color:C.cyan}}]},true);
 }
 
 /* 2 ECON */
 function renderEcon(){
   const ks=scope();
-  const deer=ks.reduce((s,k)=>s+D[k].deer,0),meat=ks.reduce((s,k)=>s+D[k].meatFact,0),olen=ks.reduce((s,k)=>s+D[k].occOlen,0);
-  T("e-deer",nf(deer));T("e-deer-s",isAll()?"голов · в среднем "+nf(deer/8)+" на район":G.mo+" · голов");
-  T("e-meat",nf(meat)+" т");T("e-olen",nf(olen));
-  T("e-title",isAll()?"Поголовье оленей — 636 тыс.; занятость — оленеводство и рыболовство":"Разрез: "+G.mo+" — "+nf(deer)+" голов, сдано "+nf(meat)+" т");
+  const deer=ks.reduce((s,k)=>s+D[k].deer,0),plan=ks.reduce((s,k)=>s+D[k].meatPlan,0),fact=ks.reduce((s,k)=>s+D[k].meatFact,0),olen=ks.reduce((s,k)=>s+D[k].occOlen,0);
+  T("e-deer",nf(deer));T("e-meat",nf(fact)+" т");T("e-meat-s","план "+nf(plan)+" т ("+ru(plan?fact/plan*100:0,0)+"%)");T("e-olen",nf(olen));
+  T("e-title",isAll()?"Поголовье оленей — 636 тыс.; план заготовки мяса выполнен на 87%":"Разрез: "+G.mo+" — "+nf(deer)+" голов, сдано "+nf(fact)+" т ("+ru(plan?fact/plan*100:0,0)+"%)");
   moBar("c-e-deer",k=>D[k].deer,"гол.",v=>nf(v));
-  moBar("c-e-meat",k=>D[k].meatFact,"т",v=>nf(v));
-  const occ=[["Оленеводы","occOlen",C.indigo],["Рыболовы","occFish",C.cyan],["Постоянная занятость",null,C.green]];
-  const parts=[
-    {name:"Оленеводы",value:ks.reduce((s,k)=>s+D[k].occOlen,0)},
-    {name:"Рыболовы",value:ks.reduce((s,k)=>s+D[k].occFish,0)},
-    {name:"Постоянная занятость",value:ks.reduce((s,k)=>s+D[k].occOther+D[k].occHunt,0)}
-  ];
-  donut("c-e-occ",parts.reduce((s,p)=>s+p.value,0),parts,[C.indigo,C.cyan,C.green]);
+  const dline=isAll()?DEER_YEARS:DEER_YEARS.map(v=>+(v*(deer/636000)).toFixed(0));
+  mk("c-e-deeryear").setOption({color:[C.indigo],tooltip:{trigger:"axis",confine:true,valueFormatter:v=>ru(v,0)+" тыс"},grid:grid,
+    xAxis:{type:"category",data:YEARS,axisLabel:bt,boundaryGap:false},yAxis:{type:"value",axisLabel:bt,splitLine:splitL,scale:true},
+    series:[{type:"line",data:dline,smooth:true,symbol:"circle",symbolSize:7,lineStyle:{width:3},areaStyle:{color:"rgba(62,62,110,.10)"},label:{show:true,position:"top",fontSize:10,color:"#6b7684",formatter:p=>ru(p.value,0)}}]},true);
+  // ЛЕПЕСТКОВАЯ план/факт: ось на каждый МО, max = план
+  mk("c-e-meat").setOption({color:[C.grey,C.green],tooltip:{trigger:"item",confine:true},legend:{top:4,textStyle:bt,icon:"roundRect"},
+    radar:{indicator:MOALL.map(k=>({name:k,max:D[k].meatPlan})),radius:"62%",center:["50%","55%"],axisName:{color:"#48566c",fontSize:10},splitLine:{lineStyle:{color:"#e3e8ef"}},splitArea:{areaStyle:{color:["#fbfdff","#f3f8fb"]}}},
+    series:[{type:"radar",data:[
+      {value:MOALL.map(k=>D[k].meatPlan),name:"План",symbol:"none",lineStyle:{color:C.grey,width:2,type:"dashed"},areaStyle:{color:"rgba(124,124,138,.10)"}},
+      {value:MOALL.map(k=>D[k].meatFact),name:"Факт (сдано)",lineStyle:{color:C.green,width:2},areaStyle:{color:"rgba(91,184,91,.28)"},label:{show:true,fontSize:9,color:"#48566c",formatter:p=>nf(p.value)}}
+    ]}]},true);
+  const occ=[["Оленеводство","occOlen",C.indigo],["Рыболовство","occFish",C.cyan],["Охотопромысел","occHunt",C.green],["Бюджет/иное","occOther",C.orange]];
+  const parts=occ.map(o=>({name:o[0],value:ks.reduce((s,k)=>s+D[k][o[1]],0)}));
+  donut("c-e-occ",parts.reduce((s,p)=>s+p.value,0),parts,occ.map(o=>o[2]));
 }
 
 /* 3 SUPPORT */
+function fillMo(id,withAll){const s=document.getElementById(id);s.innerHTML=(withAll?'<option value="Сводно по округу">Сводно по округу</option>':'')+MOALL.map(m=>`<option value="${m}">${m}</option>`).join("");}
+function fillPos(){
+  const proj=document.getElementById("g-proj").value;const s=document.getElementById("g-pos");
+  const list=proj==="std"?STD_POS:proj==="chum"?CHUM_POS:null;
+  if(!list){document.getElementById("pos-wrap").style.display="none";return;}
+  document.getElementById("pos-wrap").style.display="flex";
+  s.innerHTML='<option value="all">Все позиции (структура)</option>'+list.map((p,i)=>`<option value="${i}">${p[0]}</option>`).join("");
+}
 function renderSupport(){
-  const ks=scope();
-  const vsego=ks.reduce((s,k)=>s+D[k].housV,0),need=ks.reduce((s,k)=>s+D[k].housN,0),have=ks.reduce((s,k)=>s+D[k].housH,0);
-  const koch=ks.reduce((s,k)=>s+D[k].kochVyp,0);
-  const stdAvg=Math.round(ks.reduce((s,k)=>s+D[k].cStd,0)/ks.length);
-  T("s-house",ru(vsego?have/vsego*100:0)+"%");T("s-house-s","имеют жильё · нуждаются "+ru(vsego?need/vsego*100:0)+"%");
-  T("s-mal",isAll()?"4 919":nf(D[G.mo].famMal)+" семей");T("s-koch",nf(koch));T("s-std",stdAvg+"%");
-  T("s-title",isAll()?"Обеспеченность мерами поддержки: факт от потребности по районам":"Разрез: "+G.mo+" — рег. стандарт "+D[G.mo].cStd+"% от потребности");
-  // лепестковая: оси = МО, 3 меры (% факт/потребность)
-  mk("c-s-radar").setOption({color:[C.cyan,C.indigo,C.green],tooltip:{trigger:"item",confine:true},legend:{top:4,textStyle:bt,icon:"roundRect"},
-    radar:{indicator:MOALL.map(k=>({name:k,max:100})),radius:"66%",center:["50%","56%"],splitNumber:4,
-      axisName:{color:"#48566c",fontSize:10},axisLabel:{show:true,fontSize:9,color:"#93a0b0",formatter:v=>v+"%",showMaxLabel:true},
-      splitLine:{lineStyle:{color:"#e3e8ef"}},splitArea:{areaStyle:{color:["#fbfdff","#f3f8fb"]}}},
-    series:[{type:"radar",data:[
-      {value:MOALL.map(k=>D[k].cStd),name:"Рег. стандарт",areaStyle:{color:"rgba(63,182,211,.16)"},lineStyle:{width:2}},
-      {value:MOALL.map(k=>D[k].cChum),name:"Чумовой капитал",areaStyle:{color:"rgba(62,62,110,.10)"},lineStyle:{width:2}},
-      {value:MOALL.map(k=>D[k].cKoch),name:"Кочевые выплаты",lineStyle:{width:2,type:"dashed"}}
-    ]}]},true);
-  // заявления — кто подаёт (по видам)
-  const rows=SUP_ROWS.slice().sort((a,b)=>a.tot-b.tot);
-  mk("c-s-appl").setOption({tooltip:{trigger:"axis",confine:true,axisPointer:{type:"shadow"},valueFormatter:v=>nf(v)+" заявл."},grid:{left:12,right:72,top:14,bottom:8,containLabel:true},
-    xAxis:{type:"value",axisLabel:bt,splitLine:splitL},yAxis:{type:"category",data:rows.map(r=>r.name),axisLabel:{...bt,fontSize:10}},
-    series:[{type:"bar",data:rows.map((r,i)=>({value:r.tot,itemStyle:{color:PAL[i%PAL.length],borderRadius:[0,4,4,0]}})),barWidth:"64%",label:{show:true,position:"right",fontSize:11,color:"#48566c",fontWeight:600,formatter:p=>nf(p.value)}}]},true);
-  moBar("c-s-mal",k=>D[k].famMal,"семей",v=>nf(v));
-  moBar("c-s-kochmo",k=>D[k].kochVyp,"семей",v=>nf(v));
+  const proj=document.getElementById("g-proj").value;const ks=scope();
+  if(isAll()){T("s-k1-l","«Чумовой капитал» приобретено");T("s-k1","≈ 240 млн ₽");T("s-k1-s","по всем МО");T("s-k3","96,7 млн ₽");T("s-k4","3 398");}
+  else{T("s-k1-l","«Чумовой капитал» — "+G.mo);T("s-k1",ru(D[G.mo].chum)+" млн ₽");T("s-k1-s","приобретено");T("s-k3",nf(D[G.mo].std)+" тыс ₽");T("s-k4",nf(D[G.mo].kochVyp));}
+  T("s-title",isAll()?"На «чумовой капитал» и ГСМ направлено ≈ 367 млн ₽; лидер — Ямальский район":"Разрез: "+G.mo+" — чумовой капитал "+ru(D[G.mo].chum)+" млн ₽");
+  const t=document.getElementById("s-main-title");
+  if(proj==="chum"){t.textContent="«Чумовой капитал» — по МО, млн ₽";moBar("c-s-main",k=>D[k].chum,"млн ₽",v=>ru(v));}
+  else if(proj==="std"){t.textContent="Региональный стандарт (ТМЦ) по МО, тыс ₽";moBar("c-s-main",k=>D[k].std,"тыс ₽",v=>nf(v));}
+  else if(proj==="koch"){t.textContent="Кочевые выплаты по МО, семей";moBar("c-s-main",k=>D[k].kochVyp,"семей",v=>nf(v));}
+  else if(proj==="gsm"){t.textContent="Выплаты на ГСМ по годам, млн ₽";const ys=Object.keys(GSM_YEAR);mk("c-s-main").setOption({color:[C.cyan],tooltip:{trigger:"axis",confine:true,valueFormatter:v=>ru(v)+" млн ₽"},grid:grid,xAxis:{type:"category",data:ys,axisLabel:bt},yAxis:{type:"value",axisLabel:bt,splitLine:splitL},series:[{type:"bar",data:ys.map(y=>GSM_YEAR[y]),barWidth:"46%",itemStyle:{borderRadius:[4,4,0,0]},label:{show:true,position:"top",fontSize:11,color:"#6b7684",formatter:p=>ru(p.value)}}]},true);}
+  else if(proj==="stip"){t.textContent="Именная стипендия — получатели по годам, чел.";mk("c-s-main").setOption({color:[C.green],tooltip:{trigger:"axis",confine:true},grid:grid,xAxis:{type:"category",data:STIP_SEASONS,axisLabel:bt},yAxis:{type:"value",axisLabel:bt,splitLine:splitL},series:[{type:"bar",data:STIP_GET,barWidth:"48%",itemStyle:{borderRadius:[4,4,0,0]},label:{show:true,position:"top",fontSize:11,color:"#6b7684"}}]},true);}
+  else{t.textContent="Возмещение найма жилья (ЕПГУ), заявлений";mk("c-s-main").setOption({color:[C.indigo],tooltip:{trigger:"axis",confine:true},grid:grid,xAxis:{type:"category",data:NAJM_PERIODS,axisLabel:{...bt,fontSize:10}},yAxis:{type:"value",axisLabel:bt,splitLine:splitL},series:[{type:"bar",data:NAJM_VAL,barWidth:"48%",itemStyle:{borderRadius:[4,4,0,0]},label:{show:true,position:"top",fontSize:11,color:"#6b7684"}}]},true);}
+  renderPositions();
+  renderApplChart();
+  moBar("c-s-koch",k=>D[k].kochVyp,"семей",v=>nf(v));
+  mk("c-s-mal").setOption({color:[C.orange],tooltip:{trigger:"axis",confine:true},grid:grid,xAxis:{type:"category",data:MAL_YEARS_CAT,axisLabel:bt},yAxis:{type:"value",axisLabel:bt,splitLine:splitL},series:[{type:"bar",data:MAL_YEARS_VAL,barWidth:"46%",itemStyle:{borderRadius:[4,4,0,0]},label:{show:true,position:"top",fontSize:10,color:"#6b7684",formatter:p=>nf(p.value)}}]},true);
+  const ys=Object.keys(GSM_YEAR);
+  mk("c-s-gsm").setOption({color:[C.cyan],tooltip:{trigger:"axis",confine:true,valueFormatter:v=>ru(v)+" млн ₽"},grid:grid,xAxis:{type:"category",data:ys,axisLabel:bt,boundaryGap:false},yAxis:{type:"value",axisLabel:bt,splitLine:splitL},series:[{type:"line",data:ys.map(y=>GSM_YEAR[y]),smooth:true,symbol:"circle",symbolSize:8,lineStyle:{width:3},areaStyle:{color:"rgba(63,182,211,.12)"},label:{show:true,position:"top",fontSize:10,color:"#6b7684",formatter:p=>ru(p.value)}}]},true);
+}
+function renderPositions(){
+  const proj=document.getElementById("g-proj").value;const c=mk("c-s-pos");const tt=document.getElementById("s-pos-title");
+  const list=proj==="std"?STD_POS:proj==="chum"?CHUM_POS:null;
+  if(!list){ // для остальных проектов — состав по годам/структуре
+    tt.textContent="Детализация: динамика по годам";
+    if(proj==="gsm"){const ys=Object.keys(GSM_YEAR);c.setOption({color:[C.cyan,C.indigo,C.green,C.orange],tooltip:{trigger:"item",confine:true},legend:{bottom:0,textStyle:bt,icon:"circle"},series:[{type:"pie",radius:["45%","72%"],center:["50%","44%"],label:{formatter:"{b}: {d}%",fontSize:10},data:ys.map(y=>({name:y,value:GSM_YEAR[y]}))}]},true);}
+    else if(proj==="stip"){c.setOption({color:[C.cyan,C.green],tooltip:{trigger:"axis",confine:true},legend:legend,grid:grid,xAxis:{type:"category",data:STIP_SEASONS,axisLabel:bt},yAxis:{type:"value",axisLabel:bt,splitLine:splitL},series:[{name:"Заявившиеся",type:"bar",data:STIP_APPLY,barWidth:"34%"},{name:"Получившие",type:"bar",data:STIP_GET,barWidth:"34%"}]},true);}
+    else{c.setOption({color:[C.indigo],tooltip:{trigger:"axis",confine:true},legend:{show:false},grid:grid,xAxis:{type:"category",data:NAJM_PERIODS,axisLabel:{...bt,fontSize:9,rotate:15}},yAxis:{type:"value",axisLabel:bt,splitLine:splitL},series:[{type:"bar",data:NAJM_VAL,barWidth:"48%",itemStyle:{borderRadius:[4,4,0,0]}}]},true);}
+    return;
+  }
+  const field=proj==="std"?"std":"chum";const unit=proj==="std"?"тыс ₽":"млн ₽";
+  const projSum=MOALL.reduce((s,k)=>s+D[k][field],0);
+  const pos=document.getElementById("g-pos").value;
+  if(pos==="all"){
+    tt.textContent=(proj==="std"?"Региональный стандарт":"«Чумовой капитал»")+" — структура по позициям, "+unit+(isAll()?"":" · "+G.mo);
+    const scale=isAll()?1:(D[G.mo][field]/projSum);
+    const arr=list.map(p=>({n:p[0],v:p[1]*scale})).sort((a,b)=>a.v-b.v);
+    c.setOption({tooltip:{trigger:"axis",confine:true,axisPointer:{type:"shadow"},valueFormatter:v=>ru(v)+" "+unit},grid:{left:12,right:60,top:20,bottom:24,containLabel:true},
+      xAxis:{type:"value",axisLabel:{...bt,formatter:v=>v>=1000?v/1000+"k":v},splitLine:splitL},yAxis:{type:"category",data:arr.map(x=>x.n),axisLabel:{...bt,fontSize:10}},
+      series:[{type:"bar",data:arr.map((x,i)=>({value:x.v,itemStyle:{color:PAL[i%PAL.length],borderRadius:[0,4,4,0]}})),barWidth:"62%",label:{show:true,position:"right",fontSize:10,color:"#6b7684",formatter:p=>ru(p.value)}}]},true);
+  }else{
+    const idx=+pos;const share=list[idx][1]/projSum;
+    tt.textContent="«"+list[idx][0]+"» по МО, "+unit;
+    const arr=MOALL.map(k=>({k,v:share*D[k][field]})).sort((a,b)=>a.v-b.v);
+    c.setOption({tooltip:{trigger:"axis",confine:true,axisPointer:{type:"shadow"},valueFormatter:v=>ru(v)+" "+unit},grid:gridH,
+      xAxis:{type:"value",axisLabel:{...bt,formatter:v=>v>=1000?v/1000+"k":v},splitLine:splitL},yAxis:{type:"category",data:arr.map(x=>x.k),axisLabel:bt},
+      series:[{type:"bar",data:arr.map(x=>({value:x.v,itemStyle:{color:hiC(x.k),borderRadius:[0,4,4,0]}})),barWidth:"60%",label:{show:true,position:"right",fontSize:10,color:"#6b7684",formatter:p=>ru(p.value)}}]},true);
+  }
+}
+function renderApplChart(){
+  const c=mk("c-s-appl");if(!c)return;
+  const rows=SUP_ROWS.map(r=>({name:r.name,tot:r.v.reduce((a,b)=>a+b,0)})).sort((a,b)=>a.tot-b.tot);
+  c.setOption({tooltip:{trigger:"axis",confine:true,axisPointer:{type:"shadow"},valueFormatter:v=>nf(v)+" заявл."},grid:{left:12,right:72,top:14,bottom:8,containLabel:true},
+    xAxis:{type:"value",axisLabel:bt,splitLine:splitL},
+    yAxis:{type:"category",data:rows.map(r=>r.name),axisLabel:{...bt,fontSize:11}},
+    series:[{type:"bar",data:rows.map((r,i)=>({value:r.tot,itemStyle:{color:PAL[i%PAL.length],borderRadius:[0,4,4,0]}})),barWidth:"64%",
+      label:{show:true,position:"right",fontSize:12,color:"#48566c",fontWeight:600,formatter:p=>nf(p.value)}}]},true);
 }
 
-/* 4 EDUCATION */
+/* 4 HOUSING */
+function renderHousing(){
+  const ks=scope();const vsego=ks.reduce((s,k)=>s+D[k].housV,0),need=ks.reduce((s,k)=>s+D[k].housN,0),have=ks.reduce((s,k)=>s+D[k].housH,0);
+  T("h-vsego",nf(vsego));T("h-have",nf(have));T("h-have-s",ru(vsego?have/vsego*100:0)+"% семей");T("h-need",nf(need));T("h-share",ru(vsego?need/vsego*100:0)+"%");
+  T("h-title",isAll()?"Жильём обеспечены лишь 38% семей — 945 из 1 533 нуждаются в улучшении":"Разрез: "+G.mo+" — нуждаются "+nf(need)+" из "+nf(vsego)+" семей");
+  const d=MOALL.map(k=>({mo:k,v:D[k].housV,n:D[k].housN,h:D[k].housH})).sort((a,b)=>a.v-b.v);
+  mk("c-h-cnt").setOption({color:[C.cyan,C.orange,C.green],tooltip:{trigger:"axis",confine:true,axisPointer:{type:"shadow"}},legend:legend,grid:gridH,
+    xAxis:{type:"value",axisLabel:bt,splitLine:splitL},yAxis:{type:"category",data:d.map(x=>x.mo),axisLabel:bt},
+    series:[{name:"Всего семей",type:"bar",data:d.map(x=>({value:x.v,itemStyle:{color:(!isAll()&&x.mo===G.mo)?"#f0a860":C.cyan}})),barGap:0,barWidth:"24%"},{name:"Нуждаются",type:"bar",data:d.map(x=>x.n),barWidth:"24%"},{name:"Имеют жильё",type:"bar",data:d.map(x=>x.h),barWidth:"24%"}]},true);
+  const d2=MOALL.map(k=>({mo:k,v:D[k].housV,n:D[k].housN,h:D[k].housH})).sort((a,b)=>(a.h/a.v)-(b.h/b.v));
+  mk("c-h-share").setOption({color:[C.green,C.indigo],tooltip:{trigger:"axis",confine:true,axisPointer:{type:"shadow"},valueFormatter:v=>ru(v)+"%"},legend:legend,grid:gridH,
+    xAxis:{type:"value",max:100,axisLabel:{...bt,formatter:"{value}%"},splitLine:splitL},yAxis:{type:"category",data:d2.map(x=>x.mo),axisLabel:bt},
+    series:[{name:"Есть жильё, %",type:"bar",stack:"s",data:d2.map(x=>+(x.h/x.v*100).toFixed(1))},{name:"Нуждаются, %",type:"bar",stack:"s",data:d2.map(x=>+(x.n/x.v*100).toFixed(1))}]},true);
+}
+
+/* 5 EDUCATION */
 function renderEdu(){
   const ks=scope();
+  const pred=ks.reduce((s,k)=>s+D[k].pred,0);
   const v9=ks.reduce((s,k)=>s+D[k].v9,0),v9_10=ks.reduce((s,k)=>s+D[k].v9_10,0),v9_spo=ks.reduce((s,k)=>s+D[k].v9_spo,0);
   const v11=ks.reduce((s,k)=>s+D[k].v11,0),v11_vuz=ks.reduce((s,k)=>s+D[k].v11_vuz,0),v11_spo=ks.reduce((s,k)=>s+D[k].v11_spo,0);
-  const ino9=Math.max(0,v9-v9_10-v9_spo);
-  T("ed-v9",nf(v9));T("ed-v910",nf(v9_10));T("ed-v910-s",v9?ru(v9_10/v9*100,0)+"% выпускников 9 кл.":"");
-  T("ed-v9spo",nf(v9_spo));T("ed-v9spo-s",v9?ru(v9_spo/v9*100,0)+"% выпускников 9 кл.":"");
-  T("ed-v11",nf(v11));
-  T("ed-title",isAll()?"Выпускники 9 классов: 49% продолжают в 10 классе, 42% — в СПО":"Разрез: "+G.mo+" — выпускников 9 кл. "+nf(v9)+", 11 кл. "+nf(v11));
-  // СПО поступившие/выпустившиеся по годам
-  mk("c-ed-spo").setOption({color:[C.cyan,C.green],tooltip:{trigger:"axis",confine:true},legend:legend,grid:grid,
-    xAxis:{type:"category",data:SPO_YEARS,axisLabel:bt},yAxis:{type:"value",axisLabel:bt,splitLine:splitL},
-    series:[
-      {name:"Поступили в СПО",type:"bar",data:SPO_IN,barWidth:"34%",itemStyle:{borderRadius:[4,4,0,0]},label:{show:true,position:"top",fontSize:10,color:"#6b7684"}},
-      {name:"Выпустились из СПО",type:"bar",data:SPO_OUT,barWidth:"34%",itemStyle:{borderRadius:[4,4,0,0]},label:{show:true,position:"top",fontSize:10,color:"#6b7684"}}
-    ]},true);
-  // выпускники 9 кл — куда пошли (donut)
+  T("ed-pred",isAll()?"30%":nf(pred));T("ed-pred-s",isAll()?"1 037 детей · цель 50% к 2030":G.mo+" · охват детей");
+  T("ed-v9",nf(v9));T("ed-v9-s",nf(v9_10)+" в 10 кл. · "+nf(v9_spo)+" СПО");
+  T("ed-v11",nf(v11));T("ed-v11-s",nf(v11_vuz)+" ВУЗ · "+nf(v11_spo)+" СПО");
+  T("ed-title",isAll()?"Предшкольной подготовкой охвачено 30% детей; цель — 50% к 2030 году":"Разрез: "+G.mo+" — выпускников 9 кл. "+nf(v9)+", 11 кл. "+nf(v11));
+  donut("c-ed-pred",ED_PROGRAMS.reduce((s,p)=>s+p[1],0),ED_PROGRAMS.map(p=>({name:p[0],value:p[1]})),[C.cyan,C.indigo,C.green]);
+  mk("c-ed-predyear").setOption({color:[C.green],tooltip:{trigger:"axis",confine:true,valueFormatter:v=>v+"%"},grid:grid,
+    xAxis:{type:"category",data:RM_YEARS,axisLabel:bt,boundaryGap:false},yAxis:{type:"value",max:60,axisLabel:{...bt,formatter:"{value}%"},splitLine:splitL},
+    series:[{type:"line",data:ED_PRED_TRAJ,smooth:true,symbol:"circle",symbolSize:7,lineStyle:{width:3},areaStyle:{color:"rgba(91,184,91,.12)"},markLine:{silent:true,data:[{yAxis:50,name:"цель"}],lineStyle:{color:C.orange,type:"dashed"},label:{formatter:"цель 50%",color:C.orange}},label:{show:true,position:"top",fontSize:10,color:"#6b7684",formatter:p=>p.value+"%"}}]},true);
+  moBar("c-ed-predmo",k=>D[k].pred,"чел.",v=>nf(v));
+  const cl=ED_COLLEGES.slice().sort((a,b)=>a[1]-b[1]);
+  mk("c-ed-coll").setOption({color:[C.indigo],tooltip:{trigger:"axis",confine:true,axisPointer:{type:"shadow"},valueFormatter:v=>ru(v)+"%"},grid:{left:12,right:44,top:20,bottom:24,containLabel:true},
+    xAxis:{type:"value",max:100,axisLabel:{...bt,formatter:"{value}%"},splitLine:splitL},yAxis:{type:"category",data:cl.map(x=>x[0]),axisLabel:{...bt,fontSize:10}},
+    series:[{type:"bar",data:cl.map((x,i)=>({value:x[1],itemStyle:{color:PAL[i%PAL.length],borderRadius:[0,4,4,0]}})),barWidth:"58%",label:{show:true,position:"right",fontSize:10,color:"#6b7684",formatter:p=>ru(p.value)+"%"}}]},true);
+  const ino9=Math.max(0,v9-v9_10-v9_spo),ino11=Math.max(0,v11-v11_vuz-v11_spo);
+  const lbl={show:true,fontSize:10,color:"#fff",fontWeight:600,formatter:p=>p.value>25?nf(p.value):""};
+  mk("c-ed-traj").setOption({color:[C.green,C.orange,C.blue,C.grey],tooltip:{trigger:"axis",confine:true,axisPointer:{type:"shadow"}},legend:legend,grid:{left:12,right:24,top:38,bottom:18,containLabel:true},
+    xAxis:{type:"value",axisLabel:bt,splitLine:splitL},yAxis:{type:"category",data:["11 классов","9 классов"],axisLabel:bt},
+    series:[{name:"10 класс",type:"bar",stack:"e",data:[0,v9_10],label:lbl},{name:"СПО",type:"bar",stack:"e",data:[v11_spo,v9_spo],label:lbl},{name:"ВУЗ",type:"bar",stack:"e",data:[v11_vuz,0],label:lbl},{name:"Иное / не продолжили",type:"bar",stack:"e",data:[ino11,ino9],label:lbl}]},true);
+  mk("c-ed-stip").setOption({color:[C.cyan,C.green],tooltip:{trigger:"axis",confine:true},legend:legend,grid:grid,
+    xAxis:{type:"category",data:STIP_SEASONS,axisLabel:bt},yAxis:{type:"value",axisLabel:bt,splitLine:splitL},
+    series:[{name:"Заявившиеся",type:"bar",data:STIP_APPLY,barWidth:"34%",itemStyle:{borderRadius:[4,4,0,0]}},{name:"Получившие",type:"bar",data:STIP_GET,barWidth:"34%",itemStyle:{borderRadius:[4,4,0,0]}}]},true);
+  const em=MOALL.map(k=>({k,v9:D[k].v9,v11:D[k].v11})).sort((a,b)=>(a.v9+a.v11)-(b.v9+b.v11));
+  mk("c-ed-vypmo").setOption({color:[C.cyan,C.indigo],tooltip:{trigger:"axis",confine:true,axisPointer:{type:"shadow"}},legend:legend,grid:gridH,
+    xAxis:{type:"value",axisLabel:bt,splitLine:splitL},yAxis:{type:"category",data:em.map(x=>x.k),axisLabel:bt},
+    series:[{name:"9 классов",type:"bar",data:em.map(x=>({value:x.v9,itemStyle:{color:(!isAll()&&x.k===G.mo)?C.orange:C.cyan}})),barWidth:"36%",label:{show:true,position:"right",fontSize:9,color:"#6b7684"}},{name:"11 классов",type:"bar",data:em.map(x=>x.v11),itemStyle:{color:C.indigo},barWidth:"36%",label:{show:true,position:"right",fontSize:9,color:"#6b7684"}}]},true);
+}
+
+/* 6 ANALYTICS + ДОРОЖНАЯ КАРТА */
+function renderAnalytics(){
+  mk("c-a-month").setOption({color:[C.green,C.red],tooltip:{trigger:"axis",confine:true},legend:legend,grid:grid,xAxis:{type:"category",data:MONTHS,axisLabel:bt},yAxis:{type:"value",axisLabel:bt,splitLine:splitL},series:[{name:"Включены",type:"line",data:IN_MONTH,smooth:true,symbol:"circle",symbolSize:6,lineStyle:{width:2.5}},{name:"Выбыли",type:"line",data:OUT_MONTH,smooth:true,symbol:"circle",symbolSize:6,lineStyle:{width:2.5}}]},true);
+  mk("c-a-moveyear").setOption({color:[C.cyan],tooltip:{trigger:"axis",confine:true},grid:grid,xAxis:{type:"category",data:MOVE_YEARS_CAT,axisLabel:bt,boundaryGap:false},yAxis:{type:"value",axisLabel:bt,splitLine:splitL},series:[{type:"line",data:MOVE_YEARS_VAL,smooth:true,symbol:"circle",symbolSize:7,lineStyle:{width:3},areaStyle:{color:"rgba(63,182,211,.12)"},label:{show:true,position:"top",fontSize:10,color:"#6b7684"}}]},true);
+  mk("c-a-moveage").setOption({color:[C.orange],tooltip:{trigger:"axis",confine:true},grid:grid,xAxis:{type:"category",data:MOVE_AGE_CAT,axisLabel:{...bt,fontSize:10}},yAxis:{type:"value",axisLabel:bt,splitLine:splitL},series:[{type:"bar",data:MOVE_AGE_VAL,barWidth:"55%",itemStyle:{borderRadius:[4,4,0,0]},label:{show:true,position:"top",fontSize:10,color:"#6b7684"}}]},true);
+  renderTraj();buildRoadmapTable();
+}
+function renderTraj(){
+  var _e=document.getElementById("ra-ind");if(!_e)return;const idx=+_e.value;const r=RM[idx];
+  const xs=r.base!=null?["2020"].concat(RM_YEARS):RM_YEARS;
+  const ys=r.base!=null?[r.base].concat(r.tr):r.tr;
+  const col=r.down?C.red:C.cyan;
+  mk("c-a-traj").setOption({color:[col],tooltip:{trigger:"axis",confine:true,valueFormatter:v=>ru(v)+r.u},grid:grid,
+    xAxis:{type:"category",data:xs,axisLabel:bt,boundaryGap:false},yAxis:{type:"value",axisLabel:{...bt,formatter:v=>r.u==="%"?v+"%":(v>=1000?v/1000+"k":v)},splitLine:splitL,scale:true},
+    series:[{type:"line",data:ys,smooth:true,symbol:"circle",symbolSize:7,lineStyle:{width:3},areaStyle:{color:r.down?"rgba(217,83,79,.10)":"rgba(63,182,211,.12)"},label:{show:true,position:"top",fontSize:10,color:"#6b7684",formatter:p=>ru(p.value)}}]},true);
+}
+function buildRoadmapTable(){
+  const t=document.getElementById("tbl-roadmap");if(!t)return;
+  let h="<thead><tr><th>Целевой ориентир</th><th>2020 база</th><th>2025</th><th>2030 цель</th><th>Статус</th></tr></thead><tbody>";
+  RM.slice(0,10).forEach(r=>{
+    const v2025=r.tr[0],v2030=r.tr[r.tr.length-1];
+    let ratio; if(r.down){const b=r.base||v2025*2;ratio=(b-v2025)/(b-3000);} else {ratio=v2030?v2025/v2030:0;}
+    let dot=ratio>=0.8?C.green:ratio>=0.5?"#e8c33c":ratio>=0.25?C.orange:C.red;
+    h+=`<tr><td>${r.n}</td><td>${r.base!=null?ru(r.base):"—"}</td><td>${ru(v2025)}${r.u}</td><td>${r.goal}</td><td><span class="dot" style="background:${dot}"></span></td></tr>`;
+  });
+  h+="</tbody>";t.innerHTML=h;
+}
+
+/* ТАБЫ + ФИЛЬТРЫ */
+
+/* ═════════ НОВЫЕ СТРАНИЦЫ: Аналитика · Образование · Дорожная карта ═════════ */
+function simpleBar2(id,cats,vals,colors,unit){
+  const c=mk(id);if(!c)return;
+  c.setOption({tooltip:{trigger:"axis",confine:true,axisPointer:{type:"shadow"},valueFormatter:v=>nf(v)+(unit?" "+unit:"")},grid:grid,
+    xAxis:{type:"category",data:cats,axisLabel:{...bt,interval:0,fontSize:10}},yAxis:{type:"value",axisLabel:bt,splitLine:splitL},
+    series:[{type:"bar",barWidth:"48%",data:vals.map((v,i)=>({value:v,itemStyle:{color:(colors&&colors[i])||C.cyan,borderRadius:[4,4,0,0]}})),
+      label:{show:true,position:"top",fontSize:10,color:"#6b7684",formatter:p=>nf(p.value)}}]},true);
+}
+
+/* ── 3. АНАЛИТИКА ── */
+const PYR_AGE2=["0–4","5–18","19–36","37–55","56–70","71+"];
+const PYR_F2=[1117,2534,1966,1192,1355,449],PYR_M2=[1288,2446,2606,1535,1649,296];
+const POP_Y2=["2021","2022","2023","2024","2025","2026"],POP_V2=[12350,15786,17358,17411,17820,17868];
+const SED_Y2=["2022","2023","2024","2025","2026"],SED_V2=[500,797,610,457,40];
+const SED_AGE2=["0–10","11–20","21–40","41–60","61+"],SED_AV2=[712,556,1186,234,223];
+const MON2=["Янв","Фев","Мар","Апр","Май","Июн","Июл","Авг","Сен","Окт","Ноя","Дек"];
+const MV_IN25=[104,101,98,95,93,92,91,89,72,60,44,38],MV_OUT25=[8,10,14,19,26,34,44,58,79,104,131,152];
+const MV_IN26=[92,64,72,88,84,96,72,null,null,null,null,null],MV_OUT26=[112,46,50,62,58,68,74,null,null,null,null,null];
+const HOUSE_Y2=["2024","2025","2026"],HOUSE_H2=[71,73,76],HOUSE_N2=[30,27,24];
+const MAL_Y2=["2022","2023","2024","2025","2026"],MAL_V2=[10772,9478,8713,8066,7660];
+const MEAT_Y2=["2022","2023","2024","2025","2026"],MEAT_V2=[2009,4464,5000,5150,950];
+const FC_Y2=["2025","2026","2027","2028","2029","2030"],FC_POT2=[130,158,158,160,190,151],FC_RIGHT2=[50,55,53,85,65,80];
+
+function renderAnalytics2(){
+  const ks=scope(), all=isAll();
+  const kf=all?1:(D[G.mo].koch+D[G.mo].polu)/CANON.pop;
+  const pot=Math.round(1319*kf),rgt=Math.round(657*kf),que=Math.round(184*kf),got=Math.round(391*kf);
+  T("a-pot",nf(pot));T("a-right",nf(rgt));T("a-queue",nf(que));T("a-got",nf(got));
+  mk("c-a-funnel").setOption({tooltip:{trigger:"item",confine:true,formatter:p=>`${p.name}<br/><b>${nf(p.value)}</b> семей`},
+    series:[{type:"funnel",left:"6%",right:"6%",top:16,bottom:16,minSize:"34%",gap:3,sort:"descending",
+      label:{show:true,position:"inside",color:"#fff",fontSize:12.5,fontWeight:600,formatter:p=>`${p.name}  ${nf(p.value)}`},
+      data:[{name:"Потенциальные",value:pot,itemStyle:{color:C.cyan}},
+            {name:"Имеют право",value:rgt,itemStyle:{color:C.orange}},
+            {name:"В очереди",value:que,itemStyle:{color:C.indigo}}]}]},true);
+  mk("c-a-fc").setOption({color:[C.cyan,C.orange],tooltip:{trigger:"axis",confine:true,axisPointer:{type:"shadow"}},legend:legend,grid:grid,
+    xAxis:{type:"category",data:FC_Y2,axisLabel:bt},yAxis:{type:"value",axisLabel:bt,splitLine:splitL},
+    series:[{name:"Потенциальные",type:"bar",stack:"f",data:FC_POT2.map(v=>Math.round(v*kf)),barWidth:"46%",label:{show:true,position:"inside",fontSize:10,color:"#fff"}},
+      {name:"Имеют право",type:"bar",stack:"f",data:FC_RIGHT2.map(v=>Math.round(v*kf)),barWidth:"46%",itemStyle:{borderRadius:[4,4,0,0]},label:{show:true,position:"inside",fontSize:10,color:"#fff"}}]},true);
+
+  T("a-in","+"+nf(681*kf));T("a-out","−"+nf(313*kf));T("a-net","+"+nf(368*kf));T("a-pop",nf(17868*kf));
+  mk("c-a-pyr").setOption({color:[C.cyan,C.indigo],tooltip:{trigger:"axis",confine:true,axisPointer:{type:"shadow"}},legend:legend,grid:grid,
+    xAxis:{type:"category",data:PYR_AGE2,axisLabel:bt},yAxis:{type:"value",axisLabel:bt,splitLine:splitL},
+    series:[{name:"Женский",type:"bar",data:PYR_F2.map(v=>Math.round(v*kf)),barWidth:"34%",itemStyle:{borderRadius:[4,4,0,0]},label:{show:true,position:"top",fontSize:9.5,color:"#6b7684"}},
+      {name:"Мужской",type:"bar",data:PYR_M2.map(v=>Math.round(v*kf)),barWidth:"34%",itemStyle:{borderRadius:[4,4,0,0]},label:{show:true,position:"top",fontSize:9.5,color:"#6b7684"}}]},true);
+  mk("c-a-pop").setOption({tooltip:{trigger:"axis",confine:true},grid:grid,
+    xAxis:{type:"category",data:POP_Y2,axisLabel:bt,boundaryGap:false},
+    yAxis:{type:"value",min:v=>Math.floor(v.min*.98),axisLabel:bt,splitLine:splitL},
+    series:[{type:"line",data:POP_V2.map(v=>Math.round(v*kf)),smooth:true,symbolSize:7,lineStyle:{width:2.8,color:C.cyan},itemStyle:{color:C.cyan},
+      areaStyle:{color:"rgba(63,182,211,.13)"},label:{show:true,fontSize:10,color:"#6b7684",formatter:p=>nf(p.value)}}]},true);
+  mk("c-a-sed").setOption({tooltip:{trigger:"axis",confine:true},grid:grid,
+    xAxis:{type:"category",data:SED_Y2,axisLabel:bt,boundaryGap:false},yAxis:{type:"value",axisLabel:bt,splitLine:splitL},
+    series:[{type:"line",data:SED_V2.map(v=>Math.round(v*kf)),smooth:true,symbolSize:7,lineStyle:{width:2.6,color:C.indigo},itemStyle:{color:C.indigo},
+      areaStyle:{color:"rgba(62,62,110,.10)"},label:{show:true,fontSize:10,color:"#6b7684",formatter:p=>nf(p.value)}}]},true);
+  simpleBar2("c-a-sedage",SED_AGE2,SED_AV2.map(v=>Math.round(v*kf)),[C.cyan,C.indigo,C.green,C.orange,"#6a8cc7"],"чел.");
+  mk("c-a-move").setOption({color:[C.cyan,C.indigo,C.green,C.orange],tooltip:{trigger:"axis",confine:true},legend:legend,grid:grid,
+    xAxis:{type:"category",data:MON2,axisLabel:bt,boundaryGap:false},yAxis:{type:"value",axisLabel:bt,splitLine:splitL},
+    series:[{name:"Включено · 2025",type:"line",data:MV_IN25.map(v=>Math.round(v*kf)),smooth:true,symbolSize:5,lineStyle:{width:2}},
+      {name:"Выбыло · 2025",type:"line",data:MV_OUT25.map(v=>Math.round(v*kf)),smooth:true,symbolSize:5,lineStyle:{width:2}},
+      {name:"Включено · 2026",type:"line",data:MV_IN26.map(v=>v==null?null:Math.round(v*kf)),smooth:true,symbolSize:5,lineStyle:{width:2,type:"dashed"}},
+      {name:"Выбыло · 2026",type:"line",data:MV_OUT26.map(v=>v==null?null:Math.round(v*kf)),smooth:true,symbolSize:5,lineStyle:{width:2,type:"dashed"}}]},true);
+  mk("c-a-house").setOption({color:[C.cyan,C.orange],tooltip:{trigger:"axis",confine:true,valueFormatter:v=>v+"%"},legend:legend,grid:grid,
+    xAxis:{type:"category",data:HOUSE_Y2,axisLabel:bt,boundaryGap:false},
+    yAxis:{type:"value",max:100,axisLabel:{...bt,formatter:v=>v+"%"},splitLine:splitL},
+    series:[{name:"Есть жильё",type:"line",data:HOUSE_H2,smooth:true,symbolSize:7,lineStyle:{width:2.6},label:{show:true,fontSize:10,color:"#6b7684",formatter:p=>p.value+"%"}},
+      {name:"Нуждается",type:"line",data:HOUSE_N2,smooth:true,symbolSize:7,lineStyle:{width:2.6},label:{show:true,fontSize:10,color:"#6b7684",formatter:p=>p.value+"%"}}]},true);
+  simpleBar2("c-a-mal",MAL_Y2,MAL_V2.map(v=>Math.round(v*kf)),MAL_Y2.map(()=>C.orange),"чел.");
+
+  const olen=ks.reduce((s,k)=>s+D[k].occOlen,0),meatF=ks.reduce((s,k)=>s+D[k].meatFact,0),meatP=ks.reduce((s,k)=>s+D[k].meatPlan,0);
+  T("a-olen",nf(olen));T("a-meatfam",nf(1150*kf));T("a-meatp",meatP?Math.round(meatF/meatP*100)+"%":"—");T("a-meat",nf(meatF)+" т");
+  const oc=[{name:"Оленеводство",value:ks.reduce((s,k)=>s+D[k].occOlen,0)},
+    {name:"Рыболовство",value:ks.reduce((s,k)=>s+D[k].occFish,0)},
+    {name:"Охотоводство",value:ks.reduce((s,k)=>s+D[k].occHunt,0)},
+    {name:"Заготовка / иные",value:ks.reduce((s,k)=>s+D[k].occOther,0)}];
+  donut("c-a-occ",oc.reduce((s,p)=>s+p.value,0),oc,[C.indigo,C.cyan,C.green,C.orange]);
+  mk("c-a-meatdyn").setOption({tooltip:{trigger:"axis",confine:true,valueFormatter:v=>nf(v)+" т"},grid:grid,
+    xAxis:{type:"category",data:MEAT_Y2,axisLabel:bt,boundaryGap:false},yAxis:{type:"value",axisLabel:bt,splitLine:splitL},
+    series:[{type:"line",data:MEAT_V2.map(v=>Math.round(v*kf)),smooth:true,symbolSize:7,lineStyle:{width:2.8,color:C.green},itemStyle:{color:C.green},
+      areaStyle:{color:"rgba(91,184,91,.14)"},label:{show:true,fontSize:10,color:"#6b7684",formatter:p=>nf(p.value)}}]},true);
+  const mx=Math.max(...MOALL.map(m=>D[m].meatPlan));
+  mk("c-a-meatmo").setOption({color:[C.grey,C.green],tooltip:{trigger:"item",confine:true},legend:{top:4,textStyle:bt,icon:"roundRect"},
+    radar:{indicator:MOALL.map(k=>({name:k,max:mx})),radius:"62%",center:["50%","56%"],splitNumber:4,
+      axisName:{color:"#48566c",fontSize:9.5},splitLine:{lineStyle:{color:"#e3e8ef"}},splitArea:{areaStyle:{color:["#fbfdff","#f3f8fb"]}}},
+    series:[{type:"radar",data:[
+      {value:MOALL.map(k=>D[k].meatPlan),name:"План (100%)",lineStyle:{width:1.6,type:"dashed"}},
+      {value:MOALL.map(k=>D[k].meatFact),name:"Факт",areaStyle:{color:"rgba(91,184,91,.20)"},lineStyle:{width:2}}]}]},true);
+}
+
+/* ── 4. ОБРАЗОВАНИЕ ── */
+const COLL2=[
+ {n:"Ноябрьский колледж проф. и ИТ",all:13,km:13,toj:13},
+ {n:"Ямальский многопрофильный",all:2320,km:1100,toj:162},
+ {n:"Тарко-Салинский профессиональный",all:483,km:128,toj:36},
+ {n:"Новоуренгойский многопрофильный",all:1060,km:129,toj:71},
+ {n:"Надымский профессиональный",all:744,km:80,toj:28},
+ {n:"Муравленковский многопрофильный",all:488,km:10,toj:0}];
+const STIP_Y2=["2020/21","2021/22","2022/23","2023/24","2024/25"],STIP_A2=[54,78,120,172,135],STIP_G2=[36,50,74,96,112];
+
+function renderEdu2(){
+  const ks=scope();
+  const t=document.getElementById("t-coll");
+  if(t){
+    const rows=COLL2.slice().sort((a,b)=>(b.km/b.all)-(a.km/a.all));
+    t.innerHTML='<thead><tr><th>Колледж</th><th style="width:150px">Доля КМНС(ТОЖ)</th><th class="num">Всего</th><th class="num">КМНС</th><th class="num">ТОЖ</th></tr></thead><tbody>'+
+      rows.map(r=>{const p=r.all?r.km/r.all*100:0;
+        return '<tr><td>'+r.n+'</td><td><div style="display:flex;align-items:center;gap:8px"><div class="bar-in" style="flex:1"><i style="width:'+p+'%;background:'+(p>40?C.cyan:p>15?C.green:C.orange)+'"></i></div><b style="font-size:11.5px;color:#48566c">'+ru(p)+'%</b></div></td><td class="num">'+nf(r.all)+'</td><td class="num">'+nf(r.km)+'</td><td class="num">'+nf(r.toj)+'</td></tr>';}).join("")+
+      '</tbody><tfoot><tr><td style="font-weight:700;padding:10px">Итого</td><td></td><td class="num" style="font-weight:700">'+nf(COLL2.reduce((s,r)=>s+r.all,0))+'</td><td class="num" style="font-weight:700">'+nf(COLL2.reduce((s,r)=>s+r.km,0))+'</td><td class="num" style="font-weight:700">'+nf(COLL2.reduce((s,r)=>s+r.toj,0))+'</td></tr></tfoot>';
+  }
+  mk("c-ed-liv").setOption({color:[C.indigo,C.cyan],tooltip:{trigger:"axis",confine:true,axisPointer:{type:"shadow"}},legend:legend,grid:grid,
+    xAxis:{type:"category",data:["Общежитие","Питание","Проезд","Форма/инвентарь"],axisLabel:{...bt,fontSize:10,interval:0}},
+    yAxis:{type:"value",axisLabel:bt,splitLine:splitL},
+    series:[{name:"КМНС",type:"bar",data:[612,1459,980,742],barWidth:"32%",itemStyle:{borderRadius:[4,4,0,0]}},
+            {name:"в т.ч. ТОЖ",type:"bar",data:[188,310,240,196],barWidth:"32%",itemStyle:{borderRadius:[4,4,0,0]}}]},true);
+  donut("c-ed-fin",1459,[{name:"Бюджет ЯНАО",value:1102},{name:"Целевое обучение",value:243},{name:"Внебюджет",value:114}],[C.cyan,C.green,C.grey]);
+  donut("c-ed-prog",1399,[{name:"Программы ППССЗ",value:936},{name:"Программы ППКРС",value:454},{name:"Профобучение",value:9}],[C.indigo,C.cyan,C.orange]);
+
+  const v9=ks.reduce((s,k)=>s+D[k].v9,0),v9_10=ks.reduce((s,k)=>s+D[k].v9_10,0),v9_spo=ks.reduce((s,k)=>s+D[k].v9_spo,0);
+  const v11=ks.reduce((s,k)=>s+D[k].v11,0),v11_vuz=ks.reduce((s,k)=>s+D[k].v11_vuz,0),v11_spo=ks.reduce((s,k)=>s+D[k].v11_spo,0);
+  const ino9=Math.max(0,v9-v9_10-v9_spo),ino11=Math.max(0,v11-v11_vuz-v11_spo);
+  T("ed-v9",nf(v9));T("ed-c9",v9?Math.round((v9_10+v9_spo)/v9*100)+"%":"—");
+  T("ed-v11",nf(v11));T("ed-vuz",nf(v11_vuz));
+  T("ed-title",isAll()?"Выпускники: после 9 класса 91% продолжают обучение, после 11 класса — 88%":"Разрез: "+G.mo+" — выпускников 9 кл. "+nf(v9)+", 11 кл. "+nf(v11));
   donut("c-ed-v9",v9,[{name:"10 класс",value:v9_10},{name:"СПО",value:v9_spo},{name:"Не продолжили / иное",value:ino9}],[C.green,C.orange,C.grey]);
-  // траектории Sankey
-  const ino11=Math.max(0,v11-v11_vuz-v11_spo);
+  donut("c-ed-v11",v11,[{name:"ВУЗ",value:v11_vuz},{name:"СПО",value:v11_spo},{name:"Не продолжили / иное",value:ino11}],[C.blue,C.orange,C.grey]);
   const tot={};const links=[
     {source:"Выпускники 9 кл.",target:"10 класс",value:v9_10},
     {source:"Выпускники 9 кл.",target:"СПО",value:v9_spo},
     {source:"Выпускники 9 кл.",target:"Не продолжили / возврат к ТОЖ",value:ino9},
     {source:"Выпускники 11 кл.",target:"ВУЗ",value:v11_vuz},
     {source:"Выпускники 11 кл.",target:"СПО",value:v11_spo},
-    {source:"Выпускники 11 кл.",target:"Не продолжили / возврат к ТОЖ",value:ino11}
-  ].filter(l=>l.value>0);
+    {source:"Выпускники 11 кл.",target:"Не продолжили / возврат к ТОЖ",value:ino11}].filter(l=>l.value>0);
   links.forEach(l=>{tot[l.source]=(tot[l.source]||0)+l.value;tot[l.target]=(tot[l.target]||0)+l.value;});
-  mk("c-ed-sankey").setOption({tooltip:{trigger:"item",confine:true,triggerOn:"mousemove|click",formatter:p=>p.dataType==="edge"?`${p.data.source} → ${p.data.target}<br/><b>${nf(p.data.value)}</b>`:`${p.name}<br/><b>${nf(tot[p.name]||0)}</b>`},
-    series:[{type:"sankey",left:10,right:160,top:12,bottom:12,nodeWidth:14,nodeGap:16,
-      label:{color:"#3E3E6E",fontSize:11,formatter:p=>`${p.name}  (${nf(tot[p.name]||0)})`},
+  mk("c-ed-sankey").setOption({tooltip:{trigger:"item",confine:true,triggerOn:"mousemove|click",formatter:p=>p.dataType==="edge"?(p.data.source+" → "+p.data.target+"<br/><b>"+nf(p.data.value)+"</b>"):(p.name+"<br/><b>"+nf(tot[p.name]||0)+"</b>")},
+    series:[{type:"sankey",left:10,right:170,top:12,bottom:12,nodeWidth:14,nodeGap:16,
+      label:{color:"#3E3E6E",fontSize:11,formatter:p=>p.name+"  ("+nf(tot[p.name]||0)+")"},
       lineStyle:{color:"gradient",opacity:.45,curveness:.5},emphasis:{focus:"adjacency"},
-      data:[
-        {name:"Выпускники 9 кл.",itemStyle:{color:C.cyan}},{name:"Выпускники 11 кл.",itemStyle:{color:C.indigo}},
+      data:[{name:"Выпускники 9 кл.",itemStyle:{color:C.cyan}},{name:"Выпускники 11 кл.",itemStyle:{color:C.indigo}},
         {name:"10 класс",itemStyle:{color:C.green}},{name:"СПО",itemStyle:{color:C.orange}},
-        {name:"ВУЗ",itemStyle:{color:C.blue}},{name:"Не продолжили / возврат к ТОЖ",itemStyle:{color:C.grey}}
-      ],links:links}]},true);
+        {name:"ВУЗ",itemStyle:{color:C.blue}},{name:"Не продолжили / возврат к ТОЖ",itemStyle:{color:C.grey}}],links:links}]},true);
+
+  simpleBar2("c-ed-post",["СУЗ","ВУЗ","Не поступили"],[40,7,1],[C.cyan,C.blue,C.grey],"чел.");
+  donut("c-ed-work",5,[{name:"Ведут ТОЖ",value:3},{name:"Трудоустроены",value:2}],[C.green,C.cyan]);
+
+  mk("c-ed-stip").setOption({color:[C.cyan,C.green,C.orange],tooltip:{trigger:"axis",confine:true},legend:legend,grid:{left:12,right:44,top:38,bottom:24,containLabel:true},
+    xAxis:{type:"category",data:STIP_Y2,axisLabel:{...bt,fontSize:10}},
+    yAxis:[{type:"value",axisLabel:bt,splitLine:splitL},{type:"value",max:100,axisLabel:{...bt,formatter:v=>v+"%"},splitLine:{show:false}}],
+    series:[{name:"Заявившиеся",type:"bar",data:STIP_A2,barWidth:"30%",itemStyle:{borderRadius:[4,4,0,0]},label:{show:true,position:"top",fontSize:10,color:"#6b7684"}},
+      {name:"Получили",type:"bar",data:STIP_G2,barWidth:"30%",itemStyle:{borderRadius:[4,4,0,0]},label:{show:true,position:"top",fontSize:10,color:"#6b7684"}},
+      {name:"% одобрения",type:"line",yAxisIndex:1,data:STIP_A2.map((a,i)=>+(STIP_G2[i]/a*100).toFixed(1)),smooth:true,symbolSize:7,lineStyle:{width:2.5}}]},true);
+  donut("c-ed-stipstr",112,[{name:"Студенты ВУЗов",value:68},{name:"Студенты СПО",value:44}],[C.blue,C.cyan]);
+
+  simpleBar2("c-ed-ped",["2017–2021","2021–2025","2025–2029"],[9,10,10],[C.grey,C.cyan,C.indigo],"чел.");
+  mk("c-ed-pedcost").setOption({color:[C.indigo,C.orange],tooltip:{trigger:"axis",confine:true},legend:legend,grid:{left:12,right:44,top:38,bottom:24,containLabel:true},
+    xAxis:{type:"category",data:["2017–2021","2021–2025","2025–2029"],axisLabel:{...bt,fontSize:10}},
+    yAxis:[{type:"value",name:"млн ₽",nameTextStyle:bt,axisLabel:bt,splitLine:splitL},{type:"value",name:"тыс ₽",nameTextStyle:bt,axisLabel:bt,splitLine:{show:false}}],
+    series:[{name:"На весь срок, млн ₽",type:"bar",data:[4.2,6.1,8.8],barWidth:"42%",itemStyle:{borderRadius:[4,4,0,0]},label:{show:true,position:"top",fontSize:10,color:"#6b7684"}},
+      {name:"На 1 студента/год, тыс ₽",type:"line",yAxisIndex:1,data:[117,153,220],smooth:true,symbolSize:7,lineStyle:{width:2.5}}]},true);
+
+  const dosh=ks.reduce((s,k)=>s+(D[k].dosh||0),0),dk=ks.reduce((s,k)=>s+(D[k].doshKoch||0),0),dp=ks.reduce((s,k)=>s+(D[k].doshPodg||0),0);
+  T("ed-dosh",nf(dosh));T("ed-koch",nf(dk));T("ed-podg",nf(dp));
+  mk("c-ed-presch").setOption({color:[C.cyan,C.grey],tooltip:{trigger:"axis",confine:true,valueFormatter:v=>v+"%"},legend:legend,grid:grid,
+    xAxis:{type:"category",data:["2023","2024","2025","2026","2028","2030"],axisLabel:bt},
+    yAxis:{type:"value",max:60,axisLabel:{...bt,formatter:v=>v+"%"},splitLine:splitL},
+    series:[{name:"Факт охвата",type:"line",data:[18,24,30,34,null,null],smooth:true,symbolSize:8,lineStyle:{width:3},areaStyle:{color:"rgba(63,182,211,.14)"},label:{show:true,fontSize:10,color:"#6b7684",formatter:p=>p.value?p.value+"%":""}},
+      {name:"Траектория к цели 50%",type:"line",data:[null,null,30,34,42,50],smooth:true,symbolSize:7,lineStyle:{width:2,type:"dashed"},label:{show:true,fontSize:10,color:"#93a0b0",formatter:p=>p.value?p.value+"%":""}}]},true);
+  donut("c-ed-preform",dk+dp,[{name:"Кочевые детские сады",value:dk},{name:"Подготовительные классы",value:dp}],[C.cyan,C.orange]);
+
+  const il=ks.reduce((s,k)=>s+(D[k].intL||0),0),im=ks.reduce((s,k)=>s+(D[k].intM||0),0);
+  T("ed-int",nf(il));T("ed-intm",nf(im));T("ed-intf","свободно "+nf(Math.max(0,im-il)));
+  T("ed-intp",il?Math.round(im/il*100)+"%":"—");
+  const arr=MOALL.map(k=>({k,l:D[k].intL||0,f:Math.max(0,(D[k].intM||0)-(D[k].intL||0))}));
+  mk("c-ed-intbar").setOption({color:[C.indigo,"#dbe4ee"],tooltip:{trigger:"axis",confine:true,axisPointer:{type:"shadow"}},legend:legend,grid:gridH,
+    xAxis:{type:"value",axisLabel:bt,splitLine:splitL},yAxis:{type:"category",data:arr.map(x=>x.k),axisLabel:{...bt,fontSize:10}},
+    series:[{name:"Заняты",type:"bar",stack:"a",data:arr.map(x=>x.l),barWidth:"58%"},
+      {name:"Свободны",type:"bar",stack:"a",data:arr.map(x=>x.f),barWidth:"58%",itemStyle:{borderRadius:[0,4,4,0]}}]},true);
+  const pct=im?Math.round(il/im*100):0;
+  mk("c-ed-intg").setOption({series:[{type:"gauge",startAngle:200,endAngle:-20,min:0,max:100,radius:"84%",center:["50%","58%"],
+    progress:{show:true,width:20,itemStyle:{color:pct>95?C.orange:C.green}},
+    axisLine:{lineStyle:{width:20,color:[[1,"#eef2f7"]]}},axisTick:{show:false},splitLine:{show:false},
+    axisLabel:{distance:26,color:"#93a0b0",fontSize:10,formatter:v=>v+"%"},pointer:{show:false},
+    detail:{valueAnimation:true,fontSize:30,fontWeight:800,color:C.indigo,offsetCenter:[0,"5%"],formatter:v=>v+"%"},
+    title:{show:true,offsetCenter:[0,"32%"],fontSize:12,color:"#6b7684"},
+    data:[{value:pct,name:"занятость мест"}]}]},true);
 }
 
-/* ТАБЫ + ФИЛЬТР */
-const R={demo:renderDemo,econ:renderEcon,support:renderSupport,edu:renderEdu};
+/* ── 5. ДОРОЖНАЯ КАРТА ── */
+const TG=[
+ {n:1,name:"Число малоимущих граждан, ведущих ТОЖ КМНС",unit:"чел.",base:12043,plan:null,planTxt:"мониторинг",fact:4480,st:"ok",dev:null,trend:[12043,9800,7400,5900,4919,4480]},
+ {n:2,name:"Сокращение очередности на предоставление средств рег. стандарта",unit:"%",base:0,plan:5,planTxt:"5",fact:3.2,st:"bad",dev:-36.0,trend:[0,0,0,0,0,3.2]},
+ {n:3,name:"Доля семей с поголовьем, вовлечённых в сдачу мяса",unit:"%",base:26,plan:36,planTxt:"36",fact:34.8,st:"warn",dev:-3.3,trend:[26,29,31,33,35,34.8]},
+ {n:4,name:"Выход туш без ограничений по результатам ВСЭ",unit:"%",base:83,plan:85.5,planTxt:"85,5",fact:85.9,st:"ok",dev:0.5,trend:[83.1,83.8,84.2,84.6,85,85.9]},
+ {n:5,name:"Семьи ТОЖ, успешно интегрированные в город/посёлок (жильё + работа)",unit:"семей",base:0,plan:0,planTxt:"0",fact:2,st:"ok",dev:null,trend:[0,0,0,0,0,2]},
+ {n:6,name:"Доля выпускников 9 и 11 классов, продолживших обучение или трудоустроенных",unit:"%",base:72,plan:87,planTxt:"87",fact:84.1,st:"warn",dev:-3.3,trend:[72,78,81,84,87,84.1]},
+ {n:7,name:"Доля граждан ТОЖ, охваченных медицинской помощью",unit:"%",base:45,plan:50,planTxt:"50",fact:46.5,st:"warn",dev:-7.0,trend:[45,46,47,48,50,46.5]},
+ {n:8,name:"Бизнес-проекты, открытые участниками программы (нарастающим итогом)",unit:"шт.",base:0,plan:5,planTxt:"5",fact:3,st:"bad",dev:-40.0,trend:[0,1,2,3,5,3]},
+ {n:9,name:"Доля мероприятий ДК, отражённых в дашбордах",unit:"%",base:0,plan:30,planTxt:"30",fact:18,st:"bad",dev:-40.0,trend:[0,0,4,8,10,18]},
+ {n:10,name:"Доля граждан ТОЖ, одобривших и пользующихся мерами поддержки ДК",unit:"%",base:0,plan:80,planTxt:"80",fact:76,st:"warn",dev:-5.0,trend:[0,0,62,70,80,76]}];
+const DEV_TREND_Y=["2020","2021","2022","2023","2024","2025","07.2026"],DEV_TREND=[-13.2,-11.7,-10.1,-9.3,-9.8,-10.6,-11.5];
+const ST_TXT={ok:"в графике",warn:"внимание",bad:"отставание"};
+const ST_COL={ok:C.green,warn:C.orange,bad:C.red};
+var DKF="all";
+function spark(vals,color){
+  if(!vals||!vals.length)return"";
+  const w=90,h=26,mn=Math.min(...vals),mx=Math.max(...vals),rg=(mx-mn)||1;
+  const pts=vals.map((v,i)=>((i/(vals.length-1)*(w-4)+2).toFixed(1))+","+((h-2-((v-mn)/rg)*(h-6)).toFixed(1))).join(" ");
+  const lx=(w-2),ly=(h-2-((vals[vals.length-1]-mn)/rg)*(h-6));
+  return '<svg width="'+w+'" height="'+h+'"><polyline points="'+pts+'" fill="none" stroke="'+color+'" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/><circle cx="'+lx.toFixed(1)+'" cy="'+ly.toFixed(1)+'" r="2.4" fill="'+color+'"/></svg>';
+}
+function renderRoadmap(){
+  const list=DKF==="all"?TG:TG.filter(t=>t.st===DKF);
+  T("k-ok",TG.filter(t=>t.st==="ok").length);
+  T("k-warn",TG.filter(t=>t.st==="warn").length);
+  T("k-bad",TG.filter(t=>t.st==="bad").length);
+  const devs=TG.filter(t=>t.dev!==null);
+  T("k-dev",ru(devs.reduce((s,t)=>s+t.dev,0)/devs.length).replace("-","−")+"%");
+  const dv=list.filter(t=>t.dev!==null).slice().sort((a,b)=>a.dev-b.dev);
+  mk("c-dk-dev").setOption({tooltip:{trigger:"axis",confine:true,axisPointer:{type:"shadow"},valueFormatter:v=>ru(v)+"%"},
+    grid:{left:12,right:56,top:14,bottom:26,containLabel:true},
+    xAxis:{type:"value",axisLabel:{...bt,formatter:v=>v+"%"},splitLine:splitL},
+    yAxis:{type:"category",data:dv.map(t=>"№"+t.n+" · "+(t.name.length>44?t.name.slice(0,42)+"…":t.name)),axisLabel:{...bt,fontSize:10.5}},
+    series:[{type:"bar",barWidth:"58%",data:dv.map(t=>({value:t.dev,itemStyle:{color:ST_COL[t.st],borderRadius:t.dev<0?[4,0,0,4]:[0,4,4,0]}})),
+      label:{show:true,position:"right",fontSize:10.5,color:"#48566c",fontWeight:600,formatter:p=>(p.value>0?"+":"")+ru(p.value)+"%"}}]},true);
+  const cnt={ok:TG.filter(t=>t.st==="ok").length,warn:TG.filter(t=>t.st==="warn").length,bad:TG.filter(t=>t.st==="bad").length};
+  mk("c-dk-st").setOption({color:[C.green,C.orange,C.red],tooltip:{trigger:"item",confine:true},
+    legend:{bottom:0,textStyle:bt,icon:"circle"},
+    series:[{type:"pie",radius:["52%","74%"],center:["50%","44%"],
+      label:{show:true,formatter:"{c}",fontSize:15,fontWeight:700,color:"#48566c"},labelLine:{length:8,length2:10},
+      data:[{name:"в графике",value:cnt.ok},{name:"отклонение до 10%",value:cnt.warn},{name:"отставание",value:cnt.bad}]}]},true);
+  mk("c-dk-tr").setOption({tooltip:{trigger:"axis",confine:true,valueFormatter:v=>ru(v)+"%"},grid:{left:12,right:30,top:22,bottom:24,containLabel:true},
+    xAxis:{type:"category",data:DEV_TREND_Y,axisLabel:bt,boundaryGap:false},
+    yAxis:{type:"value",max:0,min:-15,axisLabel:{...bt,formatter:v=>v+"%"},splitLine:splitL},
+    series:[{type:"line",data:DEV_TREND,smooth:true,symbolSize:8,lineStyle:{width:2.6,color:C.red},itemStyle:{color:C.red},
+      areaStyle:{color:"rgba(217,83,79,.10)"},label:{show:true,fontSize:10.5,color:"#6b7684",formatter:p=>ru(p.value)+"%"},
+      markArea:{silent:true,itemStyle:{color:"rgba(217,83,79,.05)"},data:[[{yAxis:-10},{yAxis:-15}]]}}]},true);
+  const t=document.getElementById("t-dk");
+  if(t){t.innerHTML='<thead><tr><th style="width:36px">№</th><th>Целевой ориентир</th><th class="ctr">Ед.</th><th class="num">База 2020</th><th class="num">План 2026</th><th class="num">Факт 01.07.2026</th><th class="ctr">Статус</th><th class="ctr">Тренд 2020→2026</th></tr></thead><tbody>'+
+    list.map(r=>'<tr><td class="ctr">'+r.n+'</td><td>'+r.name+'</td><td class="ctr">'+r.unit+'</td><td class="num">'+nf(r.base)+'</td><td class="num">'+r.planTxt+'</td>'+
+      '<td class="num"><span class="cellv '+r.st+'">'+ru(r.fact)+'</span></td>'+
+      '<td class="ctr"><span class="st '+r.st+'">'+ST_TXT[r.st]+'</span></td>'+
+      '<td class="ctr">'+spark(r.trend,ST_COL[r.st])+'</td></tr>').join("")+'</tbody>';}
+}
+
+const R={demo:renderDemo,support:renderSupport,analytics:renderAnalytics2,edu:renderEdu2,roadmap:renderRoadmap};
 let cur="demo";
 function showTab(n){
   cur=n;
   document.querySelectorAll(".tab").forEach(t=>t.classList.toggle("active",t.dataset.tab===n));
   document.querySelectorAll(".tabpane").forEach(p=>p.classList.add("hidden"));
   document.getElementById("tab-"+n).classList.remove("hidden");
+  document.getElementById("proj-wrap").style.display=(n==="support")?"flex":"none";
+  var sw=document.getElementById("st-wrap");if(sw)sw.style.display=(n==="roadmap")?"flex":"none";
+  document.getElementById("pos-wrap").style.display=(n==="support"&&["std","chum"].includes(document.getElementById("g-proj").value))?"flex":"none";
   R[n]();
   setTimeout(()=>Object.values(charts).forEach(c=>c.resize()),60);
 }
+document.getElementById("g-st").addEventListener("change",e=>{DKF=e.target.value;renderRoadmap();setTimeout(()=>Object.values(charts).forEach(c=>c.resize()),50);});
 document.querySelectorAll(".tab").forEach(t=>t.addEventListener("click",()=>showTab(t.dataset.tab)));
-document.getElementById("g-mo").innerHTML='<option value="Сводно по округу">Сводно по округу</option>'+MOALL.map(m=>`<option value="${m}">${m}</option>`).join("");
+fillMo("g-mo",true);
+const gy=document.getElementById("g-year");gy.innerHTML=YEARS.slice().reverse().map(y=>`<option value="${y}">${y}</option>`).join("");gy.value="2026";G.year="2026";
+var _ra=document.getElementById("ra-ind");if(_ra)_ra.innerHTML=RM.map((r,i)=>`<option value="${i}">${r.n}</option>`).join("");
+fillPos();
 document.getElementById("g-mo").addEventListener("change",e=>{G.mo=e.target.value;document.getElementById("bc-mo").textContent=G.mo;R[cur]();setTimeout(()=>Object.values(charts).forEach(c=>c.resize()),50);});
+document.getElementById("g-year").addEventListener("change",e=>{G.year=e.target.value;document.getElementById("bc-year").textContent=G.year;R[cur]();});
+document.getElementById("g-proj").addEventListener("change",()=>{fillPos();renderSupport();setTimeout(()=>Object.values(charts).forEach(c=>c.resize()),50);});
+document.getElementById("g-pos").addEventListener("change",renderPositions);
+if(_ra)_ra.addEventListener("change",renderTraj);
 window.addEventListener("resize",()=>Object.values(charts).forEach(c=>c.resize()));
 window.addEventListener("orientationchange",()=>setTimeout(()=>Object.values(charts).forEach(c=>c.resize()),250));
 showTab("demo");
